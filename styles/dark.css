@@ -1,0 +1,52 @@
+:root {
+    --bg-light: #f8f9fa;
+    --bg-dark: #343a40;
+
+    --text-light-main: #ffffff;
+    --text-light-secondary: #d4d8db;
+    --text-dark-main: #101214;
+    --text-dark-secondary: #343a40;
+
+    --green: #28a745;
+    --red: #dc3545;
+    --purple: #6f42c1;
+    --orange: orange;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-light-main);
+}
+
+.header {
+    color: var(--text-light-main);
+}
+
+.nav a, footer, footer a, .right a{
+    color: var(--text-light-secondary);
+}
+
+.nav a:hover, footer a:hover,  .right a:hover{
+    color: var(--text-light-main);
+}
+
+.selected{
+    color: var(--text-light-main)!important;
+}
+
+label {
+    background-color: var(--text-light-secondary);
+    color: var(--text-dark-secondary);
+    transition: all 0.1s ease-in-out;
+}
+
+/* checked */
+input[type="radio"]:checked + label {
+    background-color: var(--green);
+    color: var(--text-light-main);
+}
+/* hover */
+label:hover {
+    background-color: var(--green);
+    color: var(--text-light-main);
+}

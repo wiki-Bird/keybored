@@ -16,9 +16,6 @@
     --font-large: 1.2rem;
     --font-xlarge: 1.5rem;
     --font-small: 0.8rem;
-
-
-
 }
 
 html, body {
@@ -37,14 +34,9 @@ footer {
     text-align: center;
     justify-content: space-between;
     font-size: var(--font-small);
-
-
 }
 
 body {
-    background-color: var(--bg-light);
-    color: var(--text-dark-main);
-
     /* font-family: 'Frank Ruhl Libre', serif;
     font-family: 'Inter', sans-serif; */
     font-family: 'Roboto Slab', serif;
@@ -61,8 +53,6 @@ h1 {
 }
 
 .header {
-    /* background:red; */
-    color: var(--text-dark-main);
     padding: 1rem 2rem 1rem 2rem;
     margin-bottom: 1rem;
     display: flex;
@@ -78,8 +68,7 @@ h1 {
     margin-left: 15px;
 }
 
-.nav a, footer, footer a{
-    color: var(--text-dark-secondary);
+.nav a, footer, footer a, .right a{
     text-decoration: none;
     transition: all 0.1s ease-in-out;
 }
@@ -88,14 +77,68 @@ h1 {
     margin-left: 30px;
 }
 
-.nav a:hover, footer a:hover {
-    color: var(--text-dark-main);
+.main {
+    padding: 1rem 2rem 1rem 2rem;
 }
 
-.selected{
-    color: var(--text-dark-main)!important;
-    /* border-bottom: #101214;
-    border-bottom-style: solid; */
+.words {
+    /* center vertically and horizontally */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    font-size: var(--font-xlarge);
+}
+
+.correct {
+    color: var(--green);
+}
+
+.wrong {
+    color: var(--red);
+}
+
+.settingsColumn {
+    /* background:red; */
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    /* align children center */
+    justify-content: center;
+    align-items: center;
+
 }
 
 
+input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+label {
+    display: inline-block;
+    padding: 10px;
+    cursor: pointer;
+    transition: all 0.1s ease-in-out;
+    min-width: 150px;
+    text-align: center;
+    /* make text unhighlitable */
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+}
+  
+
+.firstLbl {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+.lastLbl {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}

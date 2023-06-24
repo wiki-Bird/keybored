@@ -1,0 +1,54 @@
+:root {
+    --bg-light: #f8f9fa;
+    --bg-dark: #343a40;
+
+    --text-light-main: #ffffff;
+    --text-light-secondary: #d4d8db;
+    --text-dark-main: #101214;
+    --text-dark-secondary: #343a40;
+
+    --green: #28a745;
+    --red: #dc3545;
+    --purple: #6f42c1;
+    --orange: orange;
+}
+
+body {
+    background-color: var(--bg-light);
+    color: var(--text-dark-main);
+}
+
+.header {
+    color: var(--text-dark-main);
+}
+
+.nav a, footer, footer a, .right a{
+    color: var(--text-dark-secondary);
+}
+
+.nav a:hover, footer a:hover,  .right a:hover{
+    color: var(--text-dark-main);
+}
+
+.selected{
+    color: var(--text-dark-main)!important;
+    /* border-bottom: #101214;
+    border-bottom-style: solid; */
+}
+
+label {
+    background-color: var(--bg-dark);
+    color: var(--text-light-main);
+    transition: all 0.1s ease-in-out;
+}
+
+/* checked */
+input[type="radio"]:checked + label {
+    background-color: var(--green);
+    color: var(--text-light-main);
+}
+/* hover */
+label:hover {
+    background-color: var(--green);
+    color: var(--text-light-main);
+}

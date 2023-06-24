@@ -10,7 +10,6 @@
 
     <script src="https://kit.fontawesome.com/b28f3098c8.js" crossorigin="anonymous"></script>
 
-
     <link rel="apple-touch-icon" sizes="180x180" href="./images/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon-16x16.png">
@@ -32,20 +31,31 @@
             <div class="left">
                 <h1><i class="fa-solid fa-keyboard"></i> keybored</h1>
                 <div class="nav">
-                    <a href="index.html" class="selected"><i class="fa-solid fa-bolt"></i> Sprint</a>
+                    <a href="index.html"><i class="fa-solid fa-bolt"></i> Sprint</a>
                     <a href="timetrial.html"><i class="fa-solid fa-stopwatch"></i> Time Trial</a>
                     <a href="alphabet.html"><i class="fa-solid fa-arrow-down-a-z"></i> Alphabet</a>
                     <a href="pi.html"><i class="fa-solid fa-pi"></i> Pi</a>
                 </div>
             </div>
             <div class="right">
-                <a href="settings.html"><i class="fa-solid fa-gear"></i> Settings</a>
+                <a href="settings.html" class="selected"><i class="fa-solid fa-gear"></i> Settings</a>
             </div> 
         </div>
 
         <div class="main">
-            <div class="words">
-                My wife was... very nice. A wonderful, warm woman. And then one day, she turned into this amazing creature who could sit on the end of a broomstick and take off into the air. She could actually achieve flight.
+            <div class="settingsColumn">
+                <h1>Settings</h1>
+                <div class="setting">
+                    <h3>Theme:</h3>
+                    <div class="toggle">
+                        <input type="radio" name="sizeBy" value="weight" id="light"/>
+                        <label for="light" onclick="changeTheme('light')" class="firstLbl">Light</label>
+                        <input type="radio" name="sizeBy" value="dimensions" id="dark" />
+                        <label for="dark" onclick="changeTheme('dark')">Dark</label>
+                        <input type="radio" name="sizeBy" value="dimensions" id="system" />
+                        <label for="system" onclick="changeTheme('system')" class="lastLbl">System</label>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
