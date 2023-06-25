@@ -53,12 +53,6 @@ document.addEventListener("DOMContentLoaded", function() {
             if (ctrlDown) return false;
         }
     }
-
-
-    
-
-
-
 });
 
 

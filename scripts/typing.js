@@ -11,6 +11,24 @@ inputBox.addEventListener("blur", function() {
     tabbed = false;
 });
 
+/*
+
+TODO
+
+Switch to 3 row system similar to monkeytype. Put 3 divs in the html, and rewrite loadwords to fill them.
+When the user types a word, check if it's the last word in the first div. If it is, move it to the second div.
+If it's the last word in the second div, move the contents of the second div into the first div, and move the contents of the third div into the second div.
+Move the cursor back to the start of the second div
+Generate new words for the third div
+
+The user cannot backspace to a prior div
+
+If in sprint, have a total word count that stops the timer when it reaches the target word count
+If in time trial or marathon, have a timer that stops when it reaches 0
+
+
+
+*/
 
 document.addEventListener("DOMContentLoaded", function() {
     const hiddenInput = document.querySelector(".hiddenInput");
