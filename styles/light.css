@@ -25,12 +25,20 @@ body {
     color: var(--text-dark-main);
 }
 
-.nav a, footer, footer a, .right a {
+.nav a, .right a{
     color: var(--text-dark-secondary);
 }
 
-.nav a:hover, footer a:hover,  .right a:hover{
+.nav a:hover, .right a:hover{
     color: var(--text-dark-main);
+}
+
+footer, footer a {
+    color: var(--text-dark-tertiary);
+}
+
+footer a:hover {
+    color: var(--text-dark-secondary);
 }
 
 .selected{
@@ -62,4 +70,12 @@ label:hover {
 
 .typeArea {
     border-color: var(--text-dark-tertiary)!important;
+}
+
+.cursor {
+    color: rgb(170, 111, 0);
+}
+
+.stats {
+    color: var(--text-dark-secondary);
 }

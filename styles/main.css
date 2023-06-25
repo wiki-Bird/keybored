@@ -36,6 +36,7 @@ footer {
     justify-content: space-between;
     font-size: var(--font-small);
     transition: opacity 1s;
+    word-spacing: 20px;
 }
 
 body {
@@ -142,11 +143,20 @@ label {
 }
 
 .typeArea {
+    font-size: var(--font-xxlarge);
+}
+
+.stats {
+    height: 30px;
+    display: flex;
+    padding-left: 10px;
+}
+
+.contained{
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     position: absolute;
-    font-size: var(--font-xxlarge);
 }
 
 .hiddenInput {
@@ -171,7 +181,6 @@ label {
 .typeArea {
     border: 1px solid;
     border-radius: 4px;
-    /* background-color: blue; */
     padding: 20px 25px 20px 25px;
     letter-spacing: 1px;
     word-spacing: 2px;
@@ -179,13 +188,11 @@ label {
 
 .words2{
     position: absolute;
-    top: 20px;
-    left: 25px;
+    top: 51px;
+    left: 26px;
 }
 
 .cursor {
-    /* move up by 20px */
-  
     opacity: 1;
     /* transition: opacity 1s ease-in-out; */
     letter-spacing: -5px;

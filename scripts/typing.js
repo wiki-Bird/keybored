@@ -1,5 +1,9 @@
 const inputBox = document.querySelector(".hiddenInput");
 var tabbed = false;
+var start = false;
+var timerCount = 0;
+
+
 inputBox.addEventListener("focus", function() {
     tabbed = true;
 });
@@ -8,24 +12,25 @@ inputBox.addEventListener("blur", function() {
 });
 
 
-
 document.addEventListener("DOMContentLoaded", function() {
     const hiddenInput = document.querySelector(".hiddenInput");
     var words2 = document.querySelector(".words2");
     var valueCur = hiddenInput.value;
-    var words = document.querySelector(".words").innerHTML;
-    var wordsStart = words;
+    var wordsStart = document.querySelector(".words").innerHTML;
 
     hiddenInput.value = ""; // reset textbox on page reload
 
-
     hiddenInput.addEventListener("input", function(event) { 
+        if (start == false) {
+            start = true;
+            setInterval(increaseTimer, 1000);
+        }
         hideExtra();
+
         valueCur = hiddenInput.value;
         var inputLength = valueCur.length;
 
-        // delete the cursor
-        words2.innerHTML = words2.innerHTML.slice(0, -24);
+        words2.innerHTML = words2.innerHTML.slice(0, -24); // delete the cursor
 
         if (event.inputType == "deleteContentBackward") {  
             words2.innerHTML = words2.innerHTML.slice(0, -24);
@@ -41,8 +46,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 words2.innerHTML += addSpanToString(wordsStart[inputLength-1], "n");
             }
         }
-        // readd cursor
-        words2.innerHTML += `<span class="cursor">︳</span>`;
+
+        words2.innerHTML += `<span class="cursor">︳</span>`; // readd cursor
     });
 });
 
@@ -71,9 +76,19 @@ function hideExtra() {
 }
 
 setInterval(cursorBlink, 500);
+
 function cursorBlink() {
+    const cursor = document.querySelector('.cursor');
     if (tabbed == true){
-        const cursor = document.querySelector('.cursor');
         cursor.style.opacity = (cursor.style.opacity === '1') ? '0' : '1';
     }
+    else {
+        cursor.style.opacity = '1';
+    }
+}
+
+const timer = document.querySelector(".timer");
+function increaseTimer() {
+    timerCount += 1;
+    timer.innerHTML = timerCount;
 }

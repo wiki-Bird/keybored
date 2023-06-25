@@ -24,12 +24,20 @@ body {
     color: var(--text-light-main);
 }
 
-.nav a, footer, footer a, .right a{
+.nav a, .right a{
     color: var(--text-light-secondary);
 }
 
-.nav a:hover, footer a:hover,  .right a:hover{
+.nav a:hover, .right a:hover{
     color: var(--text-light-main);
+}
+
+footer, footer a {
+    color: var(--text-light-tertiary);
+}
+
+footer a:hover {
+    color: var(--text-light-secondary);
 }
 
 .selected{
@@ -63,4 +71,8 @@ label:hover {
 
 .cursor {
     color: orange;
+}
+
+.stats {
+    color: var(--text-light-secondary);
 }
