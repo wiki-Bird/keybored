@@ -15,6 +15,7 @@
     --font-normal: 1rem;
     --font-large: 1.2rem;
     --font-xlarge: 1.5rem;
+    --font-xxlarge: 1.7rem;
     --font-small: 0.8rem;
 }
 
@@ -68,7 +69,7 @@ h1 {
     margin-left: 15px;
 }
 
-.nav a, footer, footer a, .right a{
+.nav a, footer, footer a, .right a, .logo a, .left a{
     text-decoration: none;
     transition: all 0.1s ease-in-out;
 }
@@ -81,23 +82,14 @@ h1 {
     padding: 1rem 2rem 1rem 2rem;
 }
 
-.words {
-    /* center vertically and horizontally */
-    /* top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    position: absolute;
-    font-size: var(--font-xlarge); */
-    /* unhighlitable */
-
-}
-
 .y {
     color: var(--green);
 }
 
 .n {
     color: var(--red);
+    text-decoration: underline;
+    text-decoration-color: var(--red);
 }
 
 .settingsColumn {
@@ -152,7 +144,7 @@ label {
     left: 50%;
     transform: translate(-50%, -50%);
     position: absolute;
-    font-size: var(--font-xlarge);
+    font-size: var(--font-xxlarge);
 }
 
 .hiddenInput {

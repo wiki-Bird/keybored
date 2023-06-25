@@ -21,11 +21,11 @@ body {
     color: var(--text-dark-main);
 }
 
-.header {
+.header, .left a {
     color: var(--text-dark-main);
 }
 
-.nav a, footer, footer a, .right a{
+.nav a, footer, footer a, .right a {
     color: var(--text-dark-secondary);
 }
 

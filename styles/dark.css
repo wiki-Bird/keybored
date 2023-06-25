@@ -20,7 +20,7 @@ body {
     color: var(--text-light-main);
 }
 
-.header {
+.header, .left a {
     color: var(--text-light-main);
 }
 

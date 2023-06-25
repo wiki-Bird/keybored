@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", function() {
     hiddenInput.value = ""; // reset textbox on page reload
 
     hiddenInput.addEventListener("input", function(event) { 
+        hideExtra();
         // get length of input
         valueCur = hiddenInput.value;
         var inputLength = valueCur.length;
@@ -52,4 +53,23 @@ function removeSpanFromString(string, index) {
     const letter = string[index-8];
     const end = string.slice(index);
     return start + letter + end;
+}
+
+let timeout;
+
+function hideExtra() {
+    // for the next 2 seconds:
+    if (timeout) {
+        clearTimeout(timeout);
+    }
+    // make the opacity of the header and footer fade to 0.5
+    document.querySelector(".header").style.opacity = "0.2";
+    document.querySelector("footer").style.opacity = "0.2";
+
+    timeout = setTimeout(function() {
+        // after 2 seconds, make the opacity of the header and footer 1
+        document.querySelector(".header").style.opacity = "1";
+        document.querySelector("footer").style.opacity = "1";
+    }, 2000);
+
 }
