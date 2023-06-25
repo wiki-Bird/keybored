@@ -59,3 +59,7 @@ label:hover {
 .words {
     color: var(--text-dark-tertiary);
 }
+
+.typeArea {
+    border-color: var(--text-dark-tertiary)!important;
+}

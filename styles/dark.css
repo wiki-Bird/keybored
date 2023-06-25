@@ -56,3 +56,11 @@ label:hover {
 .words {
     color: var(--text-light-tertiary);
 }
+
+.typeArea {
+    border-color: var(--text-light-tertiary)!important;
+}
+
+.cursor {
+    color: orange;
+}
