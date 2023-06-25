@@ -21,6 +21,25 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     loadwords(40, "words");
+
+
+    // disable ctrl/cmd keys in divs with class "no-copy-paste"
+    var ctrlDown = false,
+    ctrlKey = 17,
+    cmdKey = 91,
+    vKey = 86,
+    cKey = 67;
+
+    document.onkeydown = function(e) {
+        if (e.keyCode == ctrlKey || e.keyCode == cmdKey) ctrlDown = true;
+    }
+    document.onkeyup = function(e) {
+        if (e.keyCode == ctrlKey || e.keyCode == cmdKey) ctrlDown = false;
+    }
+
+    document.querySelector(".no-copy-paste").onkeydown = function(e) {
+        if (ctrlDown) return false;
+    }
 });
 
 
