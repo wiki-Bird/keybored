@@ -4,8 +4,10 @@
 
     --text-light-main: #ffffff;
     --text-light-secondary: #d4d8db;
+    --text-light-tertiary: #969696;
     --text-dark-main: #101214;
     --text-dark-secondary: #343a40;
+    --text-dark-tertiary: #6c757d;
 
     --green: #28a745;
     --red: #dc3545;
@@ -49,4 +51,8 @@ input[type="radio"]:checked + label {
 label:hover {
     background-color: var(--green);
     color: var(--text-light-main);
+}
+
+.words {
+    color: var(--text-light-tertiary);
 }

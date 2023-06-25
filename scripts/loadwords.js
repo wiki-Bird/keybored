@@ -1,6 +1,5 @@
 
-// load words from ../words/words.js, text.Words
-function loadwords(num) {
+function loadwords(num, type) {
     let words = getWords(num);
     let wordArea = document.querySelector(".words");
     wordArea.innerHTML = "";

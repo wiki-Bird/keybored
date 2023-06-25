@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
-    loadwords(40);
+    loadwords(40, "words");
 });
 
 
