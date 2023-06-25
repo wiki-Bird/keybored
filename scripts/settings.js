@@ -8,9 +8,6 @@ function getSystemTheme() {
       } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
         return 'light';
       } 
-    //   else {
-    //     return 'no-preference';
-    //   }
 }
 
 function changeTheme(colour) {
@@ -29,5 +26,22 @@ function changeTheme(colour) {
     }
     if (colour == "system") {
         sessionStorage.setItem("theme", "system");
+    }
+}
+
+function changeFont(font) {
+    var book = document.getElementById("font");
+
+    if (font == "sans") {
+        book.href = "styles/sans.css";
+        sessionStorage.setItem("font", "sans");
+    }
+    else if (font == "serif") {
+        book.href = "styles/serif.css";
+        sessionStorage.setItem("font", "serif");
+    }
+    else {
+        book.href = "styles/mono.css";
+        sessionStorage.setItem("font", "mono");
     }
 }

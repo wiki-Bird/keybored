@@ -6,6 +6,11 @@ document.addEventListener("DOMContentLoaded", function() {
     } else {
         changeTheme("system");
     }
+    
+    var fonts = sessionStorage.getItem("font");
+    if (fonts) {
+        changeFont(fonts);
+    }
 
     if (document.querySelector(".toggle")) {
         var theme = sessionStorage.getItem("theme");
@@ -18,7 +23,19 @@ document.addEventListener("DOMContentLoaded", function() {
         else {
             document.getElementById("system").checked = true;
         }
+
+        var font = sessionStorage.getItem("font");
+        if (font == "mono") {
+            document.getElementById("mono").checked = true;
+        }
+        else if (font == "sans") {
+            document.getElementById("sans").checked = true;
+        }
+        else {
+            document.getElementById("serif").checked = true;
+        }
     }
+
 
     loadwords(40, "words");
 

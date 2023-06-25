@@ -6,6 +6,8 @@ document.addEventListener("DOMContentLoaded", function() {
     var words = document.querySelector(".words").innerHTML;
     var wordsStart = words;
 
+    hiddenInput.value = ""; // reset textbox on page reload
+
     hiddenInput.addEventListener("input", function(event) { 
         // get length of input
         valueCur = hiddenInput.value;

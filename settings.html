@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link id="stylesheet" rel="stylesheet"type="text/css" href="styles/main.css" title="main" />
     <link id="theme" rel="stylesheet" href="styles/light.css" />
+    <link id="font" rel="stylesheet" href="styles/mono.css" />
 
 
     <script src="https://kit.fontawesome.com/b28f3098c8.js" crossorigin="anonymous"></script>
@@ -47,13 +48,23 @@
                 <h1>Settings</h1>
                 <div class="setting">
                     <h3>Theme:</h3>
-                    <div class="toggle unselectable">
-                        <input type="radio" name="sizeBy" value="weight" id="light"/>
+                    <div class="toggle unselectable themeSetting">
+                        <input type="radio" name="theme" value="weight" id="light"/>
                         <label for="light" onclick="changeTheme('light')" class="firstLbl">Light</label>
-                        <input type="radio" name="sizeBy" value="dimensions" id="dark" />
+                        <input type="radio" name="theme" value="dimensions" id="dark" />
                         <label for="dark" onclick="changeTheme('dark')">Dark</label>
-                        <input type="radio" name="sizeBy" value="dimensions" id="system" />
+                        <input type="radio" name="theme" value="dimensions" id="system" />
                         <label for="system" onclick="changeTheme('system')" class="lastLbl">System</label>
+                    </div>
+                    <br>
+                    <h3>Typing Font:</h3>
+                    <div class="toggle unselectable fontSetting">
+                        <input type="radio" name="font" value="weight" id="sans"/>
+                        <label for="sans" onclick="changeFont('sans')" class="firstLbl fSa">Sans</label>
+                        <input type="radio" name="font" value="dimensions" id="serif" />
+                        <label for="serif" onclick="changeFont('serif')" class="fSe">Serif</label>
+                        <input type="radio" name="font" value="dimensions" id="mono" />
+                        <label for="mono" onclick="changeFont('mono')" class="lastLbl fMo">Mono</label>
                     </div>
                 </div>
             </div>

@@ -161,3 +161,15 @@ label {
     opacity: 0.0;
     position: absolute;
 }
+
+.fSa{
+    font-family: 'Inter', sans-serif;
+}
+
+.fMo {
+    font-family: 'Roboto Slab', serif;
+}
+
+.fSe {
+    font-family: 'Frank Ruhl Libre', serif;
+}
