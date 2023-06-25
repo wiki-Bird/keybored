@@ -19,6 +19,8 @@ document.addEventListener("DOMContentLoaded", function() {
             document.getElementById("system").checked = true;
         }
     }
+
+    loadwords(40);
 });
 
 

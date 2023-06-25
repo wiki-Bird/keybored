@@ -4,15 +4,13 @@
 
 function getSystemTheme() {
     if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        // User's preference is dark mode
         return 'dark';
       } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
-        // User's preference is light mode
         return 'light';
-      } else {
-        // User's preference is not explicitly set, or the browser doesn't support this feature
-        return 'no-preference';
-      }
+      } 
+    //   else {
+    //     return 'no-preference';
+    //   }
 }
 
 function changeTheme(colour) {
