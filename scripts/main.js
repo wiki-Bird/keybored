@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function() {
             setTimeout(function() {
                 const lines = getLines();
                 console.log(lines);
-            }, 1000);
+            }, 500);
         }
 
         // disable ctrl/cmd keys in divs with class "no-copy-paste"
