@@ -1,3 +1,6 @@
+let line1Len;
+let line2Len;
+let line3Len;
 
 function loadwords(num, type) {
     let words = getWords(num);
@@ -57,6 +60,21 @@ function getLines() {
             lines[currentRow] = [div];
             rightmostPosition = divRightPosition; // update the rightmost position for the new row
         } 
+    }
+    line1Len = lines[0].length;
+    // if there is a second line
+    if (lines[1]) {
+        line2Len = lines[1].length;
+    }
+    else {
+        line2Len = 0;
+    }
+    // if there is a third line
+    if (lines[2]) {
+        line3Len = lines[2].length;
+    }
+    else {
+        line3Len = 0;
     }
     return lines;
 }

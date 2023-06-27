@@ -3,6 +3,10 @@ var tabbed = false;
 var start = false;
 var timerCount = 0;
 
+let wordsWritten = 0;
+let wordsCorrect = 0;
+let lineWords = 0;
+
 
 inputBox.addEventListener("focus", function() {
     tabbed = true;
@@ -24,6 +28,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
     hiddenInput.addEventListener("input", function(event) { 
+        linesCheck();
         if (start == false) { // start timer
             start = true;
             setInterval(increaseTimer, 1000);
@@ -54,6 +59,8 @@ document.addEventListener("DOMContentLoaded", function() {
                         activeWord.classList.remove("wordIncorrect");
                         activeWord.previousSibling.classList.add("active");
                         activeWord.classList.remove("active");
+                        wordsWritten--;
+                        lineWords--;
                     }
                 }
             }
@@ -67,6 +74,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         }
         else if (newestChar == " " || newestChar == "Enter" || event.inputType == "insertLineBreak" || event.inputType == "insertParagraph") {
+            linesCheck();
             if (nextLetter != false) {
                 for (let i = 0; i < activeWord.childNodes.length; i++) {
                     let letter = activeWord.childNodes[i];
@@ -87,6 +95,8 @@ document.addEventListener("DOMContentLoaded", function() {
                     // remove wordIncorrect class
                     activeWord.classList.remove("wordIncorrect");
                 }
+                wordsWritten++;
+                lineWords++;
                 activeWord.nextSibling.classList.add("active");
             }
             activeWord.classList.remove("active");
@@ -165,4 +175,18 @@ const timer = document.querySelector(".timer");
 function increaseTimer() {
     timerCount += 1;
     timer.innerHTML = timerCount;
+}
+
+function linesCheck() {
+    console.log(lineWords, line1Len, line2Len)
+    // if lineWords is on line 3, delete the first line and move the cursor to the start of the second line
+    if (line1Len && lineWords >= (line1Len + line2Len)) {
+        let wordsAll = document.querySelector(".words");
+        let originlen = line1Len;
+        for (let i = 0; i < originlen; i++) {
+            wordsAll.removeChild(wordsAll.childNodes[0]);
+        }
+        pageLines = getLines();
+        lineWords = line1Len;
+    }
 }

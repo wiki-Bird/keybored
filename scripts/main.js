@@ -1,4 +1,6 @@
 // on page load
+var pageLines = {};
+
 document.addEventListener("DOMContentLoaded", function() {
     var theme = sessionStorage.getItem("theme");
     if (theme) {
@@ -38,14 +40,14 @@ document.addEventListener("DOMContentLoaded", function() {
         // console.log(getLines(document.querySelector(".words").childNodes[0]));
         if (document.fonts) {
             document.fonts.ready.then(function() {
-                const lines = getLines();
-                console.log(lines);
+                pageLines = getLines();
+                console.log(pageLines);
             });
         }
         else {
             setTimeout(function() {
-                const lines = getLines();
-                console.log(lines);
+                pageLines = getLines();
+                console.log(pageLines);
             }, 500);
         }
 
@@ -66,6 +68,19 @@ document.addEventListener("DOMContentLoaded", function() {
         document.querySelector(".no-copy-paste").onkeydown = function(e) {
             if (ctrlDown) return false;
         }
+
+        let resizing = false;
+        window.addEventListener("resize", function() {
+            console.log("resizing");
+            if (!resizing) {
+                resizing = true;
+                setTimeout(function() {
+                    pageLines = getLines();
+                    resizing = false;
+                }, 500);
+            }
+        });
+
     }
 });
 
