@@ -3,7 +3,7 @@ function loadwords(num, type) {
     let words = getWords(num);
     let wordArea = document.querySelector(".words");
     wordArea.innerHTML = "";
-    // make every word <div class="word"><letter>a</letter><letter>b</letter></div> where a, b, etc. are the letters of the word
+
     for (let word of words) {
         let wordDiv = document.createElement("div");
         wordDiv.classList.add("word");
@@ -28,17 +28,38 @@ function getWords(num) {
 }
 
 function getLines() {
-    // let contentDiv = document.querySelector(".words");
-    // let cloneDiv = document.querySelector(".words2");
+    let words = document.querySelector(".words");
+    let divs = words.children;
+    // lines as an object where the key is the line number and the value is an array of divs
+    let lines = {};
+    let currentRow = 0;
+    let rightmostPosition = 0;
 
-    // let words = contentDiv.innerHTML.split(" ");
-    // let lines = [];
-    // let line = "";
+    for (let i = 0; i < divs.length; i++) {
+        let div = divs[i];
+        let divRect = div.getBoundingClientRect();
+        let divRightPosition = divRect.right;
 
-    // for (let word of words) {
+        // console.log(div)
+        // console.log("divRightPosition: " + divRightPosition)
+        // console.log("rightmostPosition: " + rightmostPosition)
 
-    // }
-
+        if (i === 0) { // first row
+            lines[currentRow] = [div];
+            rightmostPosition = divRightPosition;
+        }
+        else if (divRightPosition >= rightmostPosition) { // same row
+            lines[currentRow].push(div);
+            rightmostPosition = divRightPosition; // update the rightmost position
+        }
+        else { // new row
+            currentRow++;
+            lines[currentRow] = [div];
+            rightmostPosition = divRightPosition; // update the rightmost position for the new row
+        } 
+    }
+    return lines;
 }
+
 
 

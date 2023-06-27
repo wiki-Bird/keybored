@@ -36,6 +36,18 @@ document.addEventListener("DOMContentLoaded", function() {
     else {
         loadwords(40, "words");
         // console.log(getLines(document.querySelector(".words").childNodes[0]));
+        if (document.fonts) {
+            document.fonts.ready.then(function() {
+                const lines = getLines();
+                console.log(lines);
+            });
+        }
+        else {
+            setTimeout(function() {
+                const lines = getLines();
+                console.log(lines);
+            }, 1000);
+        }
 
         // disable ctrl/cmd keys in divs with class "no-copy-paste"
         var ctrlDown = false,
