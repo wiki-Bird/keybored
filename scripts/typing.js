@@ -51,6 +51,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     // if there is a previous word
                     if (activeWord.previousSibling) {
                         // move the active class to the previous word
+                        activeWord.classList.remove("wordIncorrect");
                         activeWord.previousSibling.classList.add("active");
                         activeWord.classList.remove("active");
                     }
@@ -81,6 +82,10 @@ document.addEventListener("DOMContentLoaded", function() {
                 if (incorrectLetters.length > 0) {
                     // add the "wordIncorrect" class to the active word
                     activeWord.classList.add("wordIncorrect");
+                }
+                else {
+                    // remove wordIncorrect class
+                    activeWord.classList.remove("wordIncorrect");
                 }
                 activeWord.nextSibling.classList.add("active");
             }
