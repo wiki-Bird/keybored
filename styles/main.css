@@ -85,12 +85,17 @@ h1 {
     padding: 1rem 2rem 1rem 2rem;
 }
 
-.y {
+.y, .correct {
     color: var(--green);
 }
 
-.n {
+.n, .incorrect {
     color: var(--red);
+    text-decoration: underline;
+    text-decoration-color: var(--red);
+}
+
+.wordIncorrect {
     text-decoration: underline;
     text-decoration-color: var(--red);
 }
@@ -164,6 +169,7 @@ label {
     height: 100%;
     opacity: 0.0;
     position: absolute;
+    z-index: 4;
 }
 
 .fSa{
@@ -184,13 +190,40 @@ label {
     padding: 20px 25px 20px 25px;
     letter-spacing: 1px;
     word-spacing: 2px;
+    position: relative;
 }
 
 .words2{
     position: absolute;
-    top: 51px;
-    left: 26px;
+    top: 20px;
+    /* left: 26px; */
 }
+
+.words {
+    overflow: hidden;
+    height: 126px;
+    width: 100%;
+    align-content: flex-start;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.word letter {
+    display: inline block;
+}
+
+.word {
+    padding-right: .6rem;
+}
+
+
+/* .words, .words2 {
+    line-height: 1.5em;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+} */
 
 .cursor {
     opacity: 1;

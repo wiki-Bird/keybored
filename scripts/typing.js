@@ -11,63 +11,133 @@ inputBox.addEventListener("blur", function() {
     tabbed = false;
 });
 
-/*
-
-TODO
-
-Switch to 3 row system similar to monkeytype. Put 3 divs in the html, and rewrite loadwords to fill them.
-When the user types a word, check if it's the last word in the first div. If it is, move it to the second div.
-If it's the last word in the second div, move the contents of the second div into the first div, and move the contents of the third div into the second div.
-Move the cursor back to the start of the second div
-Generate new words for the third div
-
-The user cannot backspace to a prior div
-
-If in sprint, have a total word count that stops the timer when it reaches the target word count
-If in time trial or marathon, have a timer that stops when it reaches 0
-
-
-
-*/
 
 document.addEventListener("DOMContentLoaded", function() {
     const hiddenInput = document.querySelector(".hiddenInput");
-    var words2 = document.querySelector(".words2");
+    var words = document.querySelector(".words");
     var valueCur = hiddenInput.value;
-    var wordsStart = document.querySelector(".words").innerHTML;
+    var wordsStart = words.innerHTML;
 
     hiddenInput.value = ""; // reset textbox on page reload
+    var firstWord = words.childNodes[0]; // get first child div of words
+    firstWord.classList.add("active"); // give firstword the "active" class
+
 
     hiddenInput.addEventListener("input", function(event) { 
-        if (start == false) {
+        if (start == false) { // start timer
             start = true;
             setInterval(increaseTimer, 1000);
         }
-        hideExtra();
+        hideExtra(); // hide header and footer
 
-        valueCur = hiddenInput.value;
-        var inputLength = valueCur.length;
+        // get the active word
+        // get the newest character typed in the textbox
+        // if newestChar is a backspace:
+            // if there are letters with "correct"/"incorrect" classes:
+                // remove the "correct"/"incorrect" class from the last letter
+            // otherwise
+                // move the active class to the previous word
+        // else if newestChar is a space or enter:
+            // if there are any letters without "correct"/"incorrect" classes:
+                // add the "incorrect" class to all letters without "correct"/"incorrect" classes
+            // move the active class to the next word
+        // else:
+            // get the first letter of the active word to not have either the "correct" or "incorrect" class
+            // if it exists:
+                // if the newestChar is the same as the first letter of the active word:
+                    // add the "correct" class to the first letter of the active word
+                // otherwise:
+                    // add the "incorrect" class to the first letter of the active word
+            // otherwise:
+                // screen shake
 
-        words2.innerHTML = words2.innerHTML.slice(0, -24); // delete the cursor
-
-        if (event.inputType == "deleteContentBackward") {  
-            words2.innerHTML = words2.innerHTML.slice(0, -24);
-        }
-        else {
-            console.log(valueCur.slice(-1), wordsStart[inputLength-1])
-            if (valueCur.slice(-1) == wordsStart[inputLength-1]){
-                console.log("correct");
-                words2.innerHTML += addSpanToString(wordsStart[inputLength-1], "y");
+        let activeWord = document.querySelector(".active"); // get the active word
+        let newestChar = hiddenInput.value[hiddenInput.value.length - 1]; // get the newest character typed in the textbox
+        let nextLetter = checkWord(activeWord.childNodes); // first letter of active word to not have either the "correct" or "incorrect" class
+        if (event.inputType == "deleteContentBackward") {
+            console.log("Backspace");
+            if (nextLetter != false) {
+                // remove the "correct"/"incorrect" class from the letter before nextLetter
+                let letterBefore = nextLetter.previousSibling;
+                // if there is a letter before nextLetter
+                if (letterBefore) {
+                    console.log("letterBefore exists");
+                    if (letterBefore.classList.contains("correct") || letterBefore.classList.contains("incorrect")) {
+                        letterBefore.classList.remove("correct");
+                        letterBefore.classList.remove("incorrect");
+                    }
+                }
+                else {
+                    // if there is a previous word
+                    if (activeWord.previousSibling) {
+                        // move the active class to the previous word
+                        activeWord.previousSibling.classList.add("active");
+                        activeWord.classList.remove("active");
+                    }
+                }
             }
             else {
-                console.log("incorrect");
-                words2.innerHTML += addSpanToString(wordsStart[inputLength-1], "n");
+                // remove the "correct"/"incorrect" class from the last letter
+                let lastLetter = activeWord.childNodes[activeWord.childNodes.length - 1];
+                if (lastLetter.classList.contains("correct") || lastLetter.classList.contains("incorrect")) {
+                    lastLetter.classList.remove("correct");
+                    lastLetter.classList.remove("incorrect");
+                }
             }
         }
-
-        words2.innerHTML += `<span class="cursor">︳</span>`; // readd cursor
+        else if (newestChar == " " || newestChar == "Enter" || event.inputType == "insertLineBreak" || event.inputType == "insertParagraph") {
+            if (nextLetter != false) {
+                for (let i = 0; i < activeWord.childNodes.length; i++) {
+                    let letter = activeWord.childNodes[i];
+                    if (!letter.classList.contains("correct") && !letter.classList.contains("incorrect")) {
+                        letter.classList.add("incorrect");
+                    }
+                }
+            }
+            // if there is a next word
+            if (activeWord.nextSibling) {
+                // if there are any incorrect letters in the active word
+                let incorrectLetters = activeWord.querySelectorAll(".incorrect");
+                if (incorrectLetters.length > 0) {
+                    
+                activeWord.nextSibling.classList.add("active");
+            }
+            activeWord.classList.remove("active");
+        }
+        else {
+            // if nextLetter exists, get the letter after it and check if it's the same as newestChar
+            if (nextLetter != false) {
+                let nextLetterAfter = nextLetter.nextSibling;
+                if (nextLetter && nextLetter.innerHTML == newestChar) {
+                    nextLetter.classList.add("correct");
+                }
+                else if (nextLetter) {
+                    nextLetter.classList.add("incorrect");
+                }
+                else {
+                    // log error and info
+                    console.log("Error: nextLetter is false");
+                }
+            }            
+            else {
+                // screen shake
+            }
+        }
     });
 });
+
+function checkWord(word) {
+    // if there are any letters without "correct"/"incorrect" classes, return the last one
+    // otherwise return false
+    let lastLetter = false;
+    for (let i = 0; i < word.length; i++) {
+        let letter = word[i];
+        if (!letter.classList.contains("correct") && !letter.classList.contains("incorrect")) {
+            return letter;
+        }
+    }
+    return lastLetter; 
+}
 
 function addSpanToString(val, colour) {
     const middle = `<span class="${colour}">${val}</span>`;
@@ -93,8 +163,7 @@ function hideExtra() {
 
 }
 
-setInterval(cursorBlink, 500);
-
+// setInterval(cursorBlink, 500);
 function cursorBlink() {
     const cursor = document.querySelector('.cursor');
     if (tabbed == true){

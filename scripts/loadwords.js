@@ -3,8 +3,16 @@ function loadwords(num, type) {
     let words = getWords(num);
     let wordArea = document.querySelector(".words");
     wordArea.innerHTML = "";
-    for (let i = 0; i < words.length; i++) {
-        wordArea.innerHTML += `${words[i]} `;
+    // make every word <div class="word"><letter>a</letter><letter>b</letter></div> where a, b, etc. are the letters of the word
+    for (let word of words) {
+        let wordDiv = document.createElement("div");
+        wordDiv.classList.add("word");
+        for (let letter of word) {
+            let letterDiv = document.createElement("letter");
+            letterDiv.innerHTML = letter;
+            wordDiv.appendChild(letterDiv);
+        }
+        wordArea.appendChild(wordDiv);
     }
 }
 
@@ -18,3 +26,19 @@ function getWords(num) {
         return wordlist;
     }
 }
+
+function getLines() {
+    // let contentDiv = document.querySelector(".words");
+    // let cloneDiv = document.querySelector(".words2");
+
+    // let words = contentDiv.innerHTML.split(" ");
+    // let lines = [];
+    // let line = "";
+
+    // for (let word of words) {
+
+    // }
+
+}
+
+

@@ -35,7 +35,9 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     else {
         loadwords(40, "words");
-            // disable ctrl/cmd keys in divs with class "no-copy-paste"
+        // console.log(getLines(document.querySelector(".words").childNodes[0]));
+
+        // disable ctrl/cmd keys in divs with class "no-copy-paste"
         var ctrlDown = false,
         ctrlKey = 17,
         cmdKey = 91,
