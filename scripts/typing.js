@@ -30,26 +30,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }
         hideExtra(); // hide header and footer
 
-        // get the active word
-        // get the newest character typed in the textbox
-        // if newestChar is a backspace:
-            // if there are letters with "correct"/"incorrect" classes:
-                // remove the "correct"/"incorrect" class from the last letter
-            // otherwise
-                // move the active class to the previous word
-        // else if newestChar is a space or enter:
-            // if there are any letters without "correct"/"incorrect" classes:
-                // add the "incorrect" class to all letters without "correct"/"incorrect" classes
-            // move the active class to the next word
-        // else:
-            // get the first letter of the active word to not have either the "correct" or "incorrect" class
-            // if it exists:
-                // if the newestChar is the same as the first letter of the active word:
-                    // add the "correct" class to the first letter of the active word
-                // otherwise:
-                    // add the "incorrect" class to the first letter of the active word
-            // otherwise:
-                // screen shake
 
         let activeWord = document.querySelector(".active"); // get the active word
         let newestChar = hiddenInput.value[hiddenInput.value.length - 1]; // get the newest character typed in the textbox
@@ -99,7 +79,9 @@ document.addEventListener("DOMContentLoaded", function() {
                 // if there are any incorrect letters in the active word
                 let incorrectLetters = activeWord.querySelectorAll(".incorrect");
                 if (incorrectLetters.length > 0) {
-                    
+                    // add the "wordIncorrect" class to the active word
+                    activeWord.classList.add("wordIncorrect");
+                }
                 activeWord.nextSibling.classList.add("active");
             }
             activeWord.classList.remove("active");
