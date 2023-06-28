@@ -213,7 +213,8 @@ label {
 }
 
 .word {
-    padding-right: .6rem;
+    padding-right:10px; 
+    /* .6rem */
 }
 
 

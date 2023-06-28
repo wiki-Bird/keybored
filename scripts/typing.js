@@ -54,9 +54,11 @@ document.addEventListener("DOMContentLoaded", function() {
                         letterBefore.classList.remove("incorrect");
                     }
                     // moveCursorRight(letterBefore, false);
+                    moveCursorLeft(letterBefore, false);
                 }
                 else {
                     // if there is a previous word
+                    moveCursorLeft(letterBefore, activeWord);
                     if (activeWord.previousSibling) {
                         // moveCursorRight(letterBefore, activeWord.previousSibling);
                         // move the active class to the previous word
@@ -76,6 +78,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     lastLetter.classList.remove("correct");
                     lastLetter.classList.remove("incorrect");
                 }
+                moveCursorLeft(lastLetter, false);
             }
         }
         else if (newestChar == " " || newestChar == "Enter" || event.inputType == "insertLineBreak" || event.inputType == "insertParagraph") {
@@ -216,7 +219,7 @@ function moveCursorRight(nextLetter, activeWord) {
     let parentPosition = cursor.parentElement.getBoundingClientRect();
     
     // Custom offset value to adjust vertical position
-    let verticalOffset = 40; // You can adjust this value
+    let verticalOffset = 40;
     
     if (activeWord != false) {
         // move cursor to the X start position of ActiveWord
@@ -239,25 +242,29 @@ function moveCursorRight(nextLetter, activeWord) {
     cursor.style.top = adjustedYPos + "px";
 }
 
+function moveCursorLeft(curLetter, curWord) {
+    let XPos, YPos;
+    let cursor = document.querySelector(".cursorLine");
+    let parentPosition = cursor.parentElement.getBoundingClientRect();
+    let verticalOffset = 40;
 
-// function moveCursorDown(activeWord) {
-//     let YPos;
-//     let cursor = document.querySelector(".cursorLine");
-    
-//     // Assuming cursor's parent has position relative
-//     let parentPosition = cursor.parentElement.getBoundingClientRect().top;
+    let activeWord = curWord.previousSibling;
+    let nextLetter = curLetter;
 
-//     if (activeWord != false) {
-//         // move cursor to the Y start position of ActiveWord
-//         YPos = activeWord.getBoundingClientRect().top;
-//     }
-//     else {
-//         // move cursor to the Y start position of nextLetter
-//         YPos = nextLetter.getBoundingClientRect().bottom;
-//     }
-    
-//     // Adjust YPos relative to the parent element
-//     let adjustedYPos = YPos - parentPosition;
+    if (curWord != false) {
+        let activeWordRect = activeWord.getBoundingClientRect();
+        XPos = activeWordRect.right - 11;
+        YPos = activeWordRect.bottom - 2;
+    }
+    else {
+        let nextLetterRect = nextLetter.getBoundingClientRect();
+        XPos = nextLetterRect.left;
+        YPos = nextLetterRect.bottom;
+    }
 
-//     cursor.style.top = adjustedYPos + "px";
-// }
+    let adjustedXPos = XPos - parentPosition.left;
+    let adjustedYPos = YPos - parentPosition.top - verticalOffset;
+
+    cursor.style.left = adjustedXPos + "px";
+    cursor.style.top = adjustedYPos + "px";
+}
