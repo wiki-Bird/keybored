@@ -6,6 +6,7 @@ var timerCount = 0;
 let wordsWritten = 0;
 let wordsCorrect = 0;
 let lineWords = 0;
+let typingCheck = false;
 
 
 inputBox.addEventListener("focus", function() {
@@ -34,6 +35,7 @@ document.addEventListener("DOMContentLoaded", function() {
             setInterval(increaseTimer, 1000);
         }
         hideExtra(); // hide header and footer
+        typingCur();
 
 
         let activeWord = document.querySelector(".active"); // get the active word
@@ -51,16 +53,19 @@ document.addEventListener("DOMContentLoaded", function() {
                         letterBefore.classList.remove("correct");
                         letterBefore.classList.remove("incorrect");
                     }
+                    // moveCursorRight(letterBefore, false);
                 }
                 else {
                     // if there is a previous word
                     if (activeWord.previousSibling) {
+                        // moveCursorRight(letterBefore, activeWord.previousSibling);
                         // move the active class to the previous word
                         activeWord.classList.remove("wordIncorrect");
                         activeWord.previousSibling.classList.add("active");
                         activeWord.classList.remove("active");
                         wordsWritten--;
                         lineWords--;
+                        
                     }
                 }
             }
@@ -97,14 +102,15 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
                 wordsWritten++;
                 lineWords++;
+                moveCursorRight(nextLetter, activeWord.nextSibling);
                 activeWord.nextSibling.classList.add("active");
             }
             activeWord.classList.remove("active");
         }
         else {
-            // if nextLetter exists, get the letter after it and check if it's the same as newestChar
+            // if nextLetter exists check if it's the same as newestChar
+            moveCursorRight(nextLetter, false);
             if (nextLetter != false) {
-                let nextLetterAfter = nextLetter.nextSibling;
                 if (nextLetter && nextLetter.innerHTML == newestChar) {
                     nextLetter.classList.add("correct");
                 }
@@ -160,10 +166,21 @@ function hideExtra() {
 
 }
 
-// setInterval(cursorBlink, 500);
+let typingTimeout;
+function typingCur() {
+    typingCheck = true;
+    if (typingTimeout) {
+        clearTimeout(typingTimeout);
+    }
+    typingTimeout = setTimeout(function() {
+        typingCheck = false;
+    }, 300);
+}
+
+setInterval(cursorBlink, 500);
+const cursor = document.querySelector('.cursorLine');
 function cursorBlink() {
-    const cursor = document.querySelector('.cursor');
-    if (tabbed == true){
+    if (tabbed == true && typingCheck == false){
         cursor.style.opacity = (cursor.style.opacity === '1') ? '0' : '1';
     }
     else {
@@ -190,3 +207,57 @@ function linesCheck() {
         lineWords = line1Len;
     }
 }
+
+function moveCursorRight(nextLetter, activeWord) {
+    let XPos, YPos;
+    let cursor = document.querySelector(".cursorLine");
+    
+    // Assuming cursor's parent has position relative
+    let parentPosition = cursor.parentElement.getBoundingClientRect();
+    
+    // Custom offset value to adjust vertical position
+    let verticalOffset = 40; // You can adjust this value
+    
+    if (activeWord != false) {
+        // move cursor to the X start position of ActiveWord
+        let activeWordRect = activeWord.getBoundingClientRect();
+        XPos = activeWordRect.left;
+        YPos = activeWordRect.bottom - 2;
+    }
+    else {
+        // move cursor to the X start position of nextLetter
+        let nextLetterRect = nextLetter.getBoundingClientRect();
+        XPos = nextLetterRect.right;
+        YPos = nextLetterRect.bottom;
+    }
+    
+    // Adjust XPos and YPos relative to the parent element
+    let adjustedXPos = XPos - parentPosition.left;
+    let adjustedYPos = YPos - parentPosition.top - verticalOffset; // Subtracting the offset
+
+    cursor.style.left = adjustedXPos + "px";
+    cursor.style.top = adjustedYPos + "px";
+}
+
+
+// function moveCursorDown(activeWord) {
+//     let YPos;
+//     let cursor = document.querySelector(".cursorLine");
+    
+//     // Assuming cursor's parent has position relative
+//     let parentPosition = cursor.parentElement.getBoundingClientRect().top;
+
+//     if (activeWord != false) {
+//         // move cursor to the Y start position of ActiveWord
+//         YPos = activeWord.getBoundingClientRect().top;
+//     }
+//     else {
+//         // move cursor to the Y start position of nextLetter
+//         YPos = nextLetter.getBoundingClientRect().bottom;
+//     }
+    
+//     // Adjust YPos relative to the parent element
+//     let adjustedYPos = YPos - parentPosition;
+
+//     cursor.style.top = adjustedYPos + "px";
+// }

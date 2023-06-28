@@ -69,7 +69,7 @@ label:hover {
     border-color: var(--text-light-tertiary)!important;
 }
 
-.cursor {
+.cursor, .cursorLine {
     color: orange;
 }
 
