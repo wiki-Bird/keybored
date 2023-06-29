@@ -22,6 +22,9 @@
     <meta name="msapplication-config" content="./images/browserconfig.xml">
     <meta name="theme-color" content="#ffc000">
     
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
+
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre&family=Inter&family=Roboto+Slab&display=swap" rel="stylesheet">
@@ -67,8 +70,11 @@
                         </div>
                         <div class="bigText">That's faster than <span class="percent highlight">99%</span> of people!</div>
                     </div>
-
                     <div class="bottomStats"></div>
+                    <div class="buttons">
+                        <button class="statsBtn retry" onclick="retry()"><i class="fa-solid fa-arrow-rotate-left"></i> retry</button>
+                        <button class="statsBtn share" onclick="share()"><i class="fa-solid fa-share"></i> share</button>
+                    </div>
                 </div>
             </div>
         </div>

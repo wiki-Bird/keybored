@@ -72,10 +72,19 @@ label:hover {
     border-color: var(--text-light-tertiary)!important;
 }
 
-.cursor, .cursorLine {
+.cursor, .cursorLine, .highlight {
     color: orange;
 }
 
-.stats {
+.stats, .statLabel {
     color: var(--text-light-secondary);
+}
+
+.statsBtn {
+    background-color: var(--text-light-tertiary);
+    color: var(--text-dark-secondary);
+}
+.statsBtn:hover {
+    background-color: var(--text-light-secondary);
+    color: var(--text-dark-main);
 }

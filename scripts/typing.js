@@ -283,6 +283,10 @@ function moveCursorLeft(curLetter, curWord) {
     cursor.style.top = adjustedYPos + "px";
 }
 
+let wpm;
+let accuracy;
+let errors;
+let pb = localStorage.getItem("pb") || 0;
 function endRound() {
     clearInterval(timerInterval);
     
@@ -297,11 +301,9 @@ function endRound() {
     }, 300);
     let bottomStats = document.querySelector(".bottomStats");
     // add a div to the bottomStats for each stat
-    let wpm = Math.round(wordsWritten / (timerCount / 60))|| "0";
-    let accuracy = Math.round((wordsWritten / (wordsWritten + incorrectWords)) * 100) || 0;
-    let errors = incorrectWords || 0;
-    // pb from local storage or 0
-    let pb = localStorage.getItem("pb") || 0;
+    wpm = Math.round(wordsWritten / (timerCount / 60))|| "0";
+    accuracy = Math.round(((wordsWritten - incorrectWords) / wordsWritten) * 100) || 0;
+    errors = incorrectWords || 0;
     if (wpm > pb && wpm < 500 && wpm != "Infinity" && accuracy < 70) {
         pb = wpm;
         localStorage.setItem("pb", pb);
@@ -402,4 +404,25 @@ function endRound() {
 
 
 
+}
+
+function share() {
+    document.querySelector("footer").style.display = "none";
+    document.querySelector(".nav").style.display = "none";
+    document.querySelector(".right").style.display = "none";
+    html2canvas(document.body).then(function(canvas) {
+        var img = canvas.toDataURL("image/png");
+        var link = document.createElement('a');
+        link.href = img;
+        link.download = 'keyboredShare.png';
+        link.click();
+    });
+    document.querySelector("footer").style.display = "block";
+    document.querySelector(".nav").style.display = "block";
+    document.querySelector(".right").style.display = "block";
+}
+
+function retry() {
+    // reload page
+    location.reload();
 }

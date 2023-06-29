@@ -264,10 +264,6 @@ label {
     margin-bottom: 80px;
 }
 
-.highlight {
-    color: orange;
-}
-
 .bigStat {
     margin-right: 60px;
     line-height: 1;
@@ -281,7 +277,6 @@ label {
 
 .statLabel {
     font-size: 1.2rem;
-    color: #dbccab;
     padding: 0;
     margin: 0;
     /* center hosirizonally */
@@ -313,4 +308,19 @@ label {
     display: none;
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
+}
+
+.buttons {
+    display: flex;
+    /* align center */
+    margin-top: 30px;
+}
+
+.statsBtn {
+    padding: 10px 20px 10px 20px;
+    border: none;
+    border-radius: 3px;
+    transition: all 0.1s ease-in-out;
+    cursor: pointer;
+    margin-right: 50px;
 }

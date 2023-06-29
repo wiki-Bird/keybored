@@ -72,10 +72,10 @@ label:hover {
     border-color: var(--text-dark-tertiary)!important;
 }
 
-.cursor, .cursorLine {
-    color: rgb(170, 111, 0);
+.cursor, .cursorLine, .highlight {
+    color: rgb(170, 111, 0);;
 }
 
-.stats {
+.stats, .statLabel {
     color: var(--text-dark-secondary);
 }
