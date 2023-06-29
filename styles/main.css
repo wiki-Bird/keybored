@@ -236,3 +236,78 @@ label {
     position: absolute;
     z-index: 3;
 }
+
+/* .contained {
+    display:none;
+} */
+
+.statsBlock {
+    /* background-color: #404034; */
+    /* vertical and horizontal centre */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 30px;
+    justify-content: center;
+}
+
+.topBanner, .bottomStats {
+    /* inside divs side by side */
+    display: flex;
+    justify-content: space-between;  
+     /*align text centre verticalt  */
+}
+.topBanner {
+    align-items: center;
+    margin-bottom: 80px;
+}
+
+.highlight {
+    color: orange;
+}
+
+.bigStat {
+    margin-right: 60px;
+    line-height: 1;
+}
+
+.bigNum {
+    font-size: 8rem;
+    margin: 0;
+    padding: 0;
+}
+
+.statLabel {
+    font-size: 1.2rem;
+    color: #dbccab;
+    padding: 0;
+    margin: 0;
+    /* center hosirizonally */
+    text-align: center;
+}
+
+.bigText {
+    font-size: 2.5rem;
+    margin: 0;
+    padding: 0;
+    line-height: 1.2;
+}
+
+.stat {
+    width: 100px;
+}
+
+.statNum {
+    font-size: 3rem;
+    margin: 0;
+    padding: 0;
+    line-height: 1.2;
+    /* horizontally align */
+    text-align: center;
+
+}
+
+.endStats {
+    display: none;
+}

@@ -4,9 +4,10 @@ var start = false;
 var timerCount = 0;
 
 let wordsWritten = 0;
-let wordsCorrect = 0;
+let incorrectWords = 0;
 let lineWords = 0;
 let typingCheck = false;
+let timerInterval;
 
 
 inputBox.addEventListener("focus", function() {
@@ -32,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function() {
         linesCheck();
         if (start == false) { // start timer
             start = true;
-            setInterval(increaseTimer, 1000);
+            timerInterval = setInterval(increaseTimer, 1000);
         }
         hideExtra(); // hide header and footer
         typingCur();
@@ -60,14 +61,18 @@ document.addEventListener("DOMContentLoaded", function() {
                     // if there is a previous word
                     moveCursorLeft(letterBefore, activeWord);
                     if (activeWord.previousSibling) {
-                        // moveCursorRight(letterBefore, activeWord.previousSibling);
-                        // move the active class to the previous word
-                        activeWord.classList.remove("wordIncorrect");
-                        activeWord.previousSibling.classList.add("active");
-                        activeWord.classList.remove("active");
-                        wordsWritten--;
-                        lineWords--;
-                        
+                        // if the previous word has the "wordIncorrect" class
+                        if (activeWord.previousSibling.classList.contains("wordIncorrect")) {
+                            activeWord.classList.remove("wordIncorrect");
+                            activeWord.previousSibling.classList.add("active");
+                            activeWord.classList.remove("active");
+                            wordsWritten--;
+                            lineWords--;
+                            incorrectWords--;
+                        }
+                        else{
+                            // screen shake
+                        }
                     }
                 }
             }
@@ -83,6 +88,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
         else if (newestChar == " " || newestChar == "Enter" || event.inputType == "insertLineBreak" || event.inputType == "insertParagraph") {
             linesCheck();
+            wordsWritten++;
             if (nextLetter != false) {
                 for (let i = 0; i < activeWord.childNodes.length; i++) {
                     let letter = activeWord.childNodes[i];
@@ -92,21 +98,29 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
             }
             // if there is a next word
+            let incorrectLetters = activeWord.querySelectorAll(".incorrect");
             if (activeWord.nextSibling) {
                 // if there are any incorrect letters in the active word
-                let incorrectLetters = activeWord.querySelectorAll(".incorrect");
                 if (incorrectLetters.length > 0) {
                     // add the "wordIncorrect" class to the active word
                     activeWord.classList.add("wordIncorrect");
+                    incorrectWords++;
                 }
                 else {
                     // remove wordIncorrect class
                     activeWord.classList.remove("wordIncorrect");
                 }
-                wordsWritten++;
                 lineWords++;
                 moveCursorRight(nextLetter, activeWord.nextSibling);
                 activeWord.nextSibling.classList.add("active");
+            }
+            else {
+                // if there are any incorrect letters in the active word
+                if (incorrectLetters.length > 0) {
+                    incorrectWords++;
+                    activeWord.classList.add("wordIncorrect");
+                }
+                endRound();
             }
             activeWord.classList.remove("active");
         }
@@ -177,7 +191,7 @@ function typingCur() {
     }
     typingTimeout = setTimeout(function() {
         typingCheck = false;
-    }, 300);
+    }, 500);
 }
 
 setInterval(cursorBlink, 500);
@@ -267,4 +281,118 @@ function moveCursorLeft(curLetter, curWord) {
 
     cursor.style.left = adjustedXPos + "px";
     cursor.style.top = adjustedYPos + "px";
+}
+
+function endRound() {
+    clearInterval(timerInterval);
+    document.querySelector(".contained").style.display = "none";
+    // make .endStats visible
+    document.querySelector(".endStats").style.display = "block";
+    let bottomStats = document.querySelector(".bottomStats");
+    // add a div to the bottomStats for each stat
+    let wpm = Math.round(wordsWritten / (timerCount / 60))|| "0";
+    let accuracy = Math.round((wordsWritten / (wordsWritten + incorrectWords)) * 100) + "%" || "0%";
+    let errors = incorrectWords || 0;
+    // pb from local storage or 0
+    let pb = localStorage.getItem("pb") || 0;
+    if (wpm > pb) {
+        pb = wpm;
+        localStorage.setItem("pb", pb);
+    }
+
+    let stats = {"accuracy":accuracy, "words written":wordsWritten, "errors":errors, "time taken":timerCount + "s", "pb":pb};
+    for (let stat in stats) {
+        let statDiv = document.createElement("div");
+        statDiv.classList.add("stat");
+        let statNum = document.createElement("div"); // Fix: Use document.createElement
+        statNum.classList.add("statNum", "highlight");
+        statNum.innerHTML = stats[stat];
+        let statLabel = document.createElement("div"); // Fix: Use document.createElement
+        statLabel.classList.add("statLabel");
+        statLabel.innerHTML = stat;
+        statDiv.appendChild(statNum);
+        statDiv.appendChild(statLabel);
+        bottomStats.appendChild(statDiv);
+    }
+    
+    // if not infinity
+    if (wpm == "Infinity") {
+        wpm = "0";
+    }
+    document.querySelector(".bigNum").innerHTML = wpm;
+    let percent = "0%";
+
+    console.log(wpm)
+    // convert to number
+    let wpm2 = Number(wpm);
+    
+
+
+    if (wpm2 <= 24) {
+        percent = "<5%";
+    } else if (wpm2 < 27) {
+        percent = "5%";
+    } else if (wpm2 < 30) {
+        percent = "10%";
+    } else if (wpm2 < 32) {
+        percent = "15%";
+    } else if (wpm2 < 35) {
+        percent = "20%";
+    } else if (wpm2 < 37) {
+        percent = "25%";
+    } else if (wpm2 < 39) {
+        percent = "30%";
+    } else if (wpm2 < 41) {
+        percent = "35%";
+    } else if (wpm2 < 44) {
+        percent = "40%";
+    } else if (wpm2 < 46) {
+        percent = "45%";
+    } else if (wpm2 < 48) {
+        percent = "50%";
+    } else if (wpm2 < 51) {
+        percent = "55%";
+    } else if (wpm2 < 54) {
+        percent = "60%";
+    } else if (wpm2 < 57) {
+        percent = "65%";
+    } else if (wpm2 < 61) {
+        percent = "70%";
+    } else if (wpm2 < 65) {
+        percent = "75%";
+    } else if (wpm2 < 71) {
+        percent = "80%";
+    } else if (wpm2 < 77) {
+        percent = "85%";
+    } else if (wpm2 < 81) {
+        percent = "90%";
+    } else if (wpm2 < 89) {
+        percent = "93%";
+    } else if (wpm2 < 94) {
+        percent = "96%";
+    } else if (wpm2 < 100) {
+        percent = "97%";
+    } else if (wpm2 < 105) {
+        percent = "98%";
+    } else if (wpm2 < 107) {
+        percent = "99%";
+    } else if (wpm2 < 112) {
+        percent = "99.2%";
+    } else if (wpm2 < 115) {
+        percent = "99.4%";
+    } else if (wpm2 < 119) {
+        percent = "99.6%";
+    } else if (wpm2 < 123) {
+        percent = "99.7%";
+    } else if (wpm2 < 127) {
+        percent = "99.8%";
+    } else if (wpm2 >= 127) {
+        percent = "99.9%";
+    }
+
+    document.querySelector(".percent").innerHTML = percent;
+    
+
+
+
 }

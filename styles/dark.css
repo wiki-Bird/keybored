@@ -2,9 +2,12 @@
     --bg-light: #f8f9fa;
     --bg-dark: #343a40;
 
-    --text-light-main: #ffffff;
+    /* --text-light-main: #ffffff;
     --text-light-secondary: #d4d8db;
-    --text-light-tertiary: #969696;
+    --text-light-tertiary: #969696; */
+    --text-light-main: #f6ead1;
+    --text-light-secondary: #dbccab;
+    --text-light-tertiary: #a89c83;
     --text-dark-main: #101214;
     --text-dark-secondary: #343a40;
     --text-dark-tertiary: #6c757d;
