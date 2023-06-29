@@ -285,22 +285,29 @@ function moveCursorLeft(curLetter, curWord) {
 
 function endRound() {
     clearInterval(timerInterval);
-    document.querySelector(".contained").style.display = "none";
+    
     // make .endStats visible
+    
+    document.querySelector(".contained").style.opacity = "0.2";
     document.querySelector(".endStats").style.display = "block";
+    // wait 1 second
+    setTimeout(function() {
+        document.querySelector(".contained").style.display = "none";
+        document.querySelector(".endStats").style.opacity = "1";
+    }, 300);
     let bottomStats = document.querySelector(".bottomStats");
     // add a div to the bottomStats for each stat
     let wpm = Math.round(wordsWritten / (timerCount / 60))|| "0";
-    let accuracy = Math.round((wordsWritten / (wordsWritten + incorrectWords)) * 100) + "%" || "0%";
+    let accuracy = Math.round((wordsWritten / (wordsWritten + incorrectWords)) * 100) || 0;
     let errors = incorrectWords || 0;
     // pb from local storage or 0
     let pb = localStorage.getItem("pb") || 0;
-    if (wpm > pb) {
+    if (wpm > pb && wpm < 500 && wpm != "Infinity" && accuracy < 70) {
         pb = wpm;
         localStorage.setItem("pb", pb);
     }
 
-    let stats = {"accuracy":accuracy, "words written":wordsWritten, "errors":errors, "time taken":timerCount + "s", "pb":pb};
+    let stats = {"accuracy":accuracy + "%", "words":wordsWritten, "errors":errors, "time taken":timerCount + "s", "pb":pb};
     for (let stat in stats) {
         let statDiv = document.createElement("div");
         statDiv.classList.add("stat");
