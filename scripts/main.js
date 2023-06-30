@@ -36,7 +36,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
     else {
-        loadwords(40, "words");
         // console.log(getLines(document.querySelector(".words").childNodes[0]));
         if (document.fonts) {
             document.fonts.ready.then(function() {

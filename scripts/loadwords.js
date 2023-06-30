@@ -3,19 +3,33 @@ let line2Len;
 let line3Len;
 
 function loadwords(num, type) {
-    let words = getWords(num);
-    let wordArea = document.querySelector(".words");
-    wordArea.innerHTML = "";
+    if (type == "words") {
+        let words = getWords(num);
+        let wordArea = document.querySelector(".words");
+        wordArea.innerHTML = "";
 
-    for (let word of words) {
-        let wordDiv = document.createElement("div");
-        wordDiv.classList.add("word");
-        for (let letter of word) {
-            let letterDiv = document.createElement("letter");
-            letterDiv.innerHTML = letter;
-            wordDiv.appendChild(letterDiv);
+        for (let word of words) {
+            let wordDiv = document.createElement("div");
+            wordDiv.classList.add("word");
+            for (let letter of word) {
+                let letterDiv = document.createElement("letter");
+                letterDiv.innerHTML = letter;
+                wordDiv.appendChild(letterDiv);
+            }
+            wordArea.appendChild(wordDiv);
         }
-        wordArea.appendChild(wordDiv);
+    }
+    else if (type == "alphabet") {
+        let alphabet = "abcdefghijklmnopqrstuvwxyz";
+        let wordArea = document.querySelector(".words");
+        wordArea.innerHTML = "";
+
+        for (let letter of alphabet) {
+            let letterDiv = document.createElement("div");
+            letterDiv.classList.add("letter");
+            letterDiv.innerHTML = letter;
+            wordArea.appendChild(letterDiv);
+        }
     }
 }
 

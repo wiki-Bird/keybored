@@ -81,10 +81,10 @@ label:hover {
 }
 
 .statsBtn {
-    background-color: var(--text-light-tertiary);
-    color: var(--text-dark-secondary);
+    /* background-color: var(--text-light-tertiary); */
+    color: var(--text-light-secondary);
 }
 .statsBtn:hover {
-    background-color: var(--text-light-secondary);
-    color: var(--text-dark-main);
+    /* background-color: var(--text-light-secondary); */
+    color: var(--text-light-main);
 }

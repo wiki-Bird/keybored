@@ -1,13 +1,16 @@
 const inputBox = document.querySelector(".hiddenInput");
 var tabbed = false;
 var start = false;
-var timerCount = 0;
 
 let wordsWritten = 0;
 let incorrectWords = 0;
 let lineWords = 0;
 let typingCheck = false;
 let timerInterval;
+const timer = document.querySelector(".timer");
+const timerStart = timer.innerHTML;
+let countDown = false; 
+var timerCount = parseInt(timerStart);
 
 
 inputBox.addEventListener("focus", function() {
@@ -33,6 +36,9 @@ document.addEventListener("DOMContentLoaded", function() {
         linesCheck();
         if (start == false) { // start timer
             start = true;
+            if (timerCount > 0 || timerCount != "0") {
+                countDown = true;
+            }
             timerInterval = setInterval(increaseTimer, 1000);
         }
         hideExtra(); // hide header and footer
@@ -205,10 +211,18 @@ function cursorBlink() {
     }
 }
 
-const timer = document.querySelector(".timer");
+
 function increaseTimer() {
-    timerCount += 1;
+    if (countDown == true) {
+        timerCount -= 1;
+    }
+    else {
+        timerCount += 1;
+    }
     timer.innerHTML = timerCount;
+    if (timerCount <= 0) {
+        endRound();
+    }
 }
 
 function linesCheck() {
@@ -301,7 +315,7 @@ function endRound() {
     }, 300);
     let bottomStats = document.querySelector(".bottomStats");
     // add a div to the bottomStats for each stat
-    wpm = Math.round(wordsWritten / (timerCount / 60))|| "0";
+    wpm = Math.round(wordsWritten / ((timerCount + parseInt(timerStart)) / 60))|| "0";
     accuracy = Math.round(((wordsWritten - incorrectWords) / wordsWritten) * 100) || 0;
     errors = incorrectWords || 0;
     if (wpm > pb && wpm < 500 && wpm != "Infinity" && accuracy < 70) {
@@ -309,7 +323,7 @@ function endRound() {
         localStorage.setItem("pb", pb);
     }
 
-    let stats = {"accuracy":accuracy + "%", "words":wordsWritten, "errors":errors, "time taken":timerCount + "s", "pb":pb};
+    let stats = {"accuracy":accuracy + "%", "words":wordsWritten, "errors":errors, "time taken":(timerCount + parseInt(timerStart)) + "s", "pb":pb};
     for (let stat in stats) {
         let statDiv = document.createElement("div");
         statDiv.classList.add("stat");
