@@ -319,11 +319,12 @@ label {
 .statsBtn {
     padding: 10px 20px 10px 20px;
     background: none;
-    border: none;
     border-radius: 3px;
     transition: all 0.1s ease-in-out;
     cursor: pointer;
     margin-right: 50px;
     font-size: 1rem;
     font-family: 'Inter', sans-serif;
+    border: 1px solid;
 }
+

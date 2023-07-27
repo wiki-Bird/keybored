@@ -5,9 +5,12 @@
     /* --text-light-main: #ffffff;
     --text-light-secondary: #d4d8db;
     --text-light-tertiary: #969696; */
-    --text-light-main: #f6ead1;
+    /* --text-light-main: #f6ead1;
     --text-light-secondary: #dbccab;
-    --text-light-tertiary: #a89c83;
+    --text-light-tertiary: #a89c83; */
+    --text-light-main: #fffaef;
+    --text-light-secondary: #f6ead1;
+    --text-light-tertiary: #d9cdb4;
     --text-dark-main: #101214;
     --text-dark-secondary: #343a40;
     --text-dark-tertiary: #6c757d;
@@ -86,5 +89,6 @@ label:hover {
 }
 .statsBtn:hover {
     /* background-color: var(--text-light-secondary); */
-    color: var(--text-light-main);
+    background-color: var(--text-light-secondary);
+    color: var(--text-dark-main);
 }

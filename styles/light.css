@@ -73,9 +73,15 @@ label:hover {
 }
 
 .cursor, .cursorLine, .highlight {
-    color: rgb(170, 111, 0);;
+    color: rgb(236, 154, 0);
 }
 
 .stats, .statLabel {
     color: var(--text-dark-secondary);
+}
+
+.statsBtn:hover {
+    /* background-color: var(--text-light-secondary); */
+    background-color: var(--text-light-secondary);
+    color: var(--text-dark-main);
 }
