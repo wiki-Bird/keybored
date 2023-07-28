@@ -33,7 +33,17 @@ document.addEventListener("DOMContentLoaded", function() {
 
     let screenshakeStorage = sessionStorage.getItem("screenShake");
 
-    hiddenInput.addEventListener("input", function(event) { 
+    let back = false;
+
+    // hiddenInput.addEventListener("keydown", function(event) {
+    //     if (event.key === "Backspace") {
+    //         console.log('backTrue')
+    //         back = true;
+    //     }
+    // });
+
+
+    hiddenInput.addEventListener("keydown", function(event) { 
         linesCheck();
         if (start == false) { // start timer
             start = true;
@@ -47,9 +57,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
         let activeWord = document.querySelector(".active"); // get the active word
-        let newestChar = hiddenInput.value[hiddenInput.value.length - 1]; // get the newest character typed in the textbox
+        // let newestChar = hiddenInput.value[hiddenInput.value.length - 1]; // get the newest character typed in the textbox
+        let newestChar = event.key; // get the newest character typed in the textbox
         let nextLetter = checkWord(activeWord.childNodes); // first letter of active word to not have either the "correct" or "incorrect" class
-        if (event.inputType == "deleteContentBackward") {
+        if (event.key === "Backspace") {
             console.log("Backspace");
             if (nextLetter != false) {
                 // remove the "correct"/"incorrect" class from the letter before nextLetter
@@ -92,6 +103,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
                 moveCursorLeft(lastLetter, false);
             }
+            back = false;
         }
         else if (newestChar == " " || newestChar == "Enter" || event.inputType == "insertLineBreak" || event.inputType == "insertParagraph") {
             linesCheck();

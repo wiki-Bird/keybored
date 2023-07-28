@@ -47,6 +47,7 @@
 - [x] Darkmode
 - [x] Font selection
 - [x] Screen shake on error
+- [x] Fixed backspace bug
 - [x] Time trial gamemode
 - [ ] Alphabet gamemode
 - [ ] Pi gamemode
