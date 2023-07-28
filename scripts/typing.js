@@ -31,6 +31,7 @@ document.addEventListener("DOMContentLoaded", function() {
     var firstWord = words.childNodes[0]; // get first child div of words
     firstWord.classList.add("active"); // give firstword the "active" class
 
+    let screenshakeStorage = sessionStorage.getItem("screenShake");
 
     hiddenInput.addEventListener("input", function(event) { 
         linesCheck();
@@ -65,10 +66,10 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
                 else {
                     // if there is a previous word
-                    moveCursorLeft(letterBefore, activeWord);
                     if (activeWord.previousSibling) {
                         // if the previous word has the "wordIncorrect" class
                         if (activeWord.previousSibling.classList.contains("wordIncorrect")) {
+                            moveCursorLeft(letterBefore, activeWord);
                             activeWord.classList.remove("wordIncorrect");
                             activeWord.previousSibling.classList.add("active");
                             activeWord.classList.remove("active");
@@ -77,7 +78,7 @@ document.addEventListener("DOMContentLoaded", function() {
                             incorrectWords--;
                         }
                         else{
-                            // screen shake
+                            screenShake(screenshakeStorage);
                         }
                     }
                 }
@@ -132,8 +133,9 @@ document.addEventListener("DOMContentLoaded", function() {
         }
         else {
             // if nextLetter exists check if it's the same as newestChar
-            moveCursorRight(nextLetter, false);
+            
             if (nextLetter != false) {
+                moveCursorRight(nextLetter, false);
                 if (nextLetter && nextLetter.innerHTML == newestChar) {
                     nextLetter.classList.add("correct");
                 }
@@ -147,7 +149,13 @@ document.addEventListener("DOMContentLoaded", function() {
             }            
             else {
                 // screen shake
+                screenShake(screenshakeStorage);
+                console.log(screenshakeStorage);
             }
+        }
+        // if there is no next word or next letter, we're at the end of the text and the round is over
+        if (activeWord.nextSibling == null && nextLetter.nextSibling == null) {
+            endRound();
         }
     });
 });
@@ -415,9 +423,6 @@ function endRound() {
 
     document.querySelector(".percent").innerHTML = percent;
     
-
-
-
 }
 
 function share() {
@@ -439,4 +444,14 @@ function share() {
 function retry() {
     // reload page
     location.reload();
+}
+
+function screenShake(screenshake) {
+    if (screenshake != "off") {
+        // give .page-wrap the "shaking" class for 0.5 seconds
+        document.querySelector(".typeArea").classList.add("shaking");
+        setTimeout(function() {
+            document.querySelector(".typeArea").classList.remove("shaking");
+        }, 500);
+    }
 }

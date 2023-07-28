@@ -34,6 +34,14 @@ document.addEventListener("DOMContentLoaded", function() {
         else {
             document.getElementById("serif").checked = true;
         }
+
+        var screenShake = sessionStorage.getItem("screenShake");
+        if (screenShake == "off") {
+            document.getElementById("shakeOff").checked = true;
+        }
+        else {
+            document.getElementById("shakeOn").checked = true;
+        }
     }
     else {
         // console.log(getLines(document.querySelector(".words").childNodes[0]));
@@ -79,6 +87,10 @@ document.addEventListener("DOMContentLoaded", function() {
                 }, 500);
             }
         });
+
+        // click into text box on page load
+        document.querySelector(".hiddenInput").focus();
+
 
     }
 });

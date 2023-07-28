@@ -30,16 +30,16 @@
     <div class="page-wrap">
         <div class="header">
             <div class="left">
-                <a href="index.html"><h1><i class="fa-solid fa-keyboard"></i> keybored</h1></a>
+                <a href="./"><h1><i class="fa-solid fa-keyboard"></i> keybored</h1></a>
                 <div class="nav">
-                    <a href="index.html"><i class="fa-solid fa-bolt"></i> Sprint</a>
-                    <a href="timetrial.html"><i class="fa-solid fa-stopwatch"></i> Time Trial</a>
-                    <a href="alphabet.html"><i class="fa-solid fa-arrow-down-a-z"></i> Alphabet</a>
-                    <a href="pi.html"><i class="fa-solid fa-pi"></i> Pi</a>
+                    <a href="index"><i class="fa-solid fa-bolt"></i> Sprint</a>
+                    <a href="timetrial"><i class="fa-solid fa-stopwatch"></i> Time Trial</a>
+                    <a href="alphabet"><i class="fa-solid fa-arrow-down-a-z"></i> Alphabet</a>
+                    <a href="pi"><i class="fa-solid fa-pi"></i> Pi</a>
                 </div>
             </div>
             <div class="right">
-                <a href="settings.html" class="selected"><i class="fa-solid fa-gear"></i> Settings</a>
+                <a href="settings" class="selected"><i class="fa-solid fa-gear"></i> Settings</a>
             </div> 
         </div>
 
@@ -47,24 +47,32 @@
             <div class="settingsColumn">
                 <h1>Settings</h1>
                 <div class="setting">
-                    <h3>Theme:</h3>
+                    <h3>Theme</h3>
                     <div class="toggle unselectable themeSetting">
                         <input type="radio" name="theme" value="weight" id="light"/>
                         <label for="light" onclick="changeTheme('light')" class="firstLbl">Light</label>
                         <input type="radio" name="theme" value="dimensions" id="dark" />
-                        <label for="dark" onclick="changeTheme('dark')">Dark</label>
+                        <label for="dark" onclick="changeTheme('dark')" class="middleLbl">Dark</label>
                         <input type="radio" name="theme" value="dimensions" id="system" />
                         <label for="system" onclick="changeTheme('system')" class="lastLbl">System</label>
                     </div>
                     <br>
-                    <h3>Typing Font:</h3>
+                    <h3>Typing Font (game)</h3>
                     <div class="toggle unselectable fontSetting">
                         <input type="radio" name="font" value="weight" id="sans"/>
                         <label for="sans" onclick="changeFont('sans')" class="firstLbl fSa">Sans</label>
                         <input type="radio" name="font" value="dimensions" id="serif" />
-                        <label for="serif" onclick="changeFont('serif')" class="fSe">Serif</label>
+                        <label for="serif" onclick="changeFont('serif')" class="middleLbl fSe">Serif</label>
                         <input type="radio" name="font" value="dimensions" id="mono" />
                         <label for="mono" onclick="changeFont('mono')" class="lastLbl fMo">Mono</label>
+                    </div>
+                    <br>
+                    <h3>Screen Shake (on error)</h3>
+                    <div class="toggle unselectable shakeSetting">
+                        <input type="radio" name="shake" value="weight" id="shakeOn"/>
+                        <label for="shakeOn" onclick="changeShake(true)" class="firstLbl">On</label>
+                        <input type="radio" name="shake" value="dimensions" id="shakeOff" />
+                        <label for="shakeOff" onclick="changeShake(false)" class="lastLbl">Off</label>
                     </div>
                 </div>
             </div>

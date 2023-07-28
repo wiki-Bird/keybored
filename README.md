@@ -29,6 +29,8 @@
     - Toggle between light and dark mode.
 - Font:
     - Choose between a Sans, Serif, or Monospace font for the game's text.
+- Screen shake:
+    - Toggle screen shake on error.
 
 <br/><br/>
 ## Images
@@ -44,6 +46,7 @@
 
 - [x] Darkmode
 - [x] Font selection
+- [x] Screen shake on error
 - [x] Time trial gamemode
 - [ ] Alphabet gamemode
 - [ ] Pi gamemode

@@ -45,3 +45,12 @@ function changeFont(font) {
         sessionStorage.setItem("font", "mono");
     }
 }
+
+function changeShake(on){
+    if (on) {
+        sessionStorage.setItem("screenShake", "on");
+    }
+    else {
+        sessionStorage.setItem("screenShake", "off");
+    }
+}

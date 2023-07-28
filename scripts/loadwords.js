@@ -3,10 +3,11 @@ let line2Len;
 let line3Len;
 
 function loadwords(num, type) {
+    let wordArea = document.querySelector(".words");
+    wordArea.innerHTML = "";
+
     if (type == "words") {
         let words = getWords(num);
-        let wordArea = document.querySelector(".words");
-        wordArea.innerHTML = "";
 
         for (let word of words) {
             let wordDiv = document.createElement("div");
@@ -21,15 +22,15 @@ function loadwords(num, type) {
     }
     else if (type == "alphabet") {
         let alphabet = "abcdefghijklmnopqrstuvwxyz";
-        let wordArea = document.querySelector(".words");
-        wordArea.innerHTML = "";
 
+        let alphabetDiv = document.createElement("div");
+        alphabetDiv.classList.add("word");
         for (let letter of alphabet) {
-            let letterDiv = document.createElement("div");
-            letterDiv.classList.add("letter");
+            let letterDiv = document.createElement("letter");
             letterDiv.innerHTML = letter;
-            wordArea.appendChild(letterDiv);
+            alphabetDiv.appendChild(letterDiv);
         }
+        wordArea.appendChild(alphabetDiv);
     }
 }
 
