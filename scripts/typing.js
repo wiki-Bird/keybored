@@ -143,7 +143,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     incorrectWords++;
                     activeWord.classList.add("wordIncorrect");
                 }
-                // endRound();
+                endRound();
             }
             activeWord.classList.remove("active");
         }
