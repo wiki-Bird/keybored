@@ -46,15 +46,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     let screenshakeStorage = sessionStorage.getItem("screenShake");
 
-    let back = false;
-
-    // hiddenInput.addEventListener("keydown", function(event) {
-    //     if (event.key === "Backspace") {
-    //         console.log('backTrue')
-    //         back = true;
-    //     }
-    // });
-
 
     hiddenInput.addEventListener("keydown", function(event) { 
         linesCheck();
@@ -152,7 +143,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     incorrectWords++;
                     activeWord.classList.add("wordIncorrect");
                 }
-                endRound();
+                // endRound();
             }
             activeWord.classList.remove("active");
         }
@@ -347,6 +338,7 @@ function endRound() {
         document.querySelector(".endStats").style.opacity = "1";
     }, 300);
     let bottomStats = document.querySelector(".bottomStats");
+    bottomStats.innerHTML = "";
     // add a div to the bottomStats for each stat
     wpm = Math.round(wordsWritten / ((timerCount + parseInt(timerStart)) / 60))|| "0";
     accuracy = Math.round(((wordsWritten - incorrectWords) / wordsWritten) * 100) || 0;

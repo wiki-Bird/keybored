@@ -35,10 +35,12 @@
 <br/><br/>
 ## Images
 
-<a href="#" target="_blank" rel="noreferrer noopener"><img width="400" src="https://media.discordapp.net/attachments/590667063165583409/1129619238353649734/image.png"></a>
-<a href="#" target="_blank" rel="noreferrer noopener"><img width="400" src="https://media.discordapp.net/attachments/590667063165583409/1129619588393488415/image.png"></a>
-<a href="#" target="_blank" rel="noreferrer noopener"><img width="400" src="https://media.discordapp.net/attachments/590667063165583409/1129620006754340904/image.png"></a>
-<a href="#" target="_blank" rel="noreferrer noopener"><img width="400" src="https://media.discordapp.net/attachments/590667063165583409/1129620101369446530/image.png"></a>
+<a href="#" target="_blank" rel="noreferrer noopener"><img width="400" src="./images/photos/main.png"></a>
+<a href="#" target="_blank" rel="noreferrer noopener"><img width="400" src="./images/photos/blur.png"></a>
+<a href="#" target="_blank" rel="noreferrer noopener"><img width="400" src="./images/photos/stats.png"></a>
+<a href="#" target="_blank" rel="noreferrer noopener"><img width="400" src="./images/photos/settings_dark.png"></a>
+<a href="#" target="_blank" rel="noreferrer noopener"><img width="400" src="./images/photos/settings_light.png"></a>
+<a href="#" target="_blank" rel="noreferrer noopener"><img width="400" src="./images/photos/blur_light.png"></a>
 
 
 <br/><br/>
