@@ -15,9 +15,22 @@ var timerCount = parseInt(timerStart);
 
 inputBox.addEventListener("focus", function() {
     tabbed = true;
+    // remove "typeBlur" from typeArea
+    document.querySelector(".words").classList.remove("typeBlur");
+    document.querySelector(".cursorLine").classList.remove("typeBlur");
+    // remove blurText from typeArea
+    document.querySelector(".blurText").remove();
 });
 inputBox.addEventListener("blur", function() {
     tabbed = false;
+    // add "typeBlur" to typeArea
+    document.querySelector(".words").classList.add("typeBlur");
+    document.querySelector(".cursorLine").classList.add("typeBlur");
+    // add a new div to typearea with class blurText
+    let blurText = document.createElement("div");
+    blurText.classList.add("blurText");
+    blurText.innerHTML = `<i class="fa-solid fa-arrow-pointer"></i> Click here to focus`;
+    document.querySelector(".typeArea").appendChild(blurText);
 });
 
 

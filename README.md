@@ -44,11 +44,10 @@
 <br/><br/>
 ## Planned:
 
-- [x] Darkmode
-- [x] Font selection
 - [x] Screen shake on error
 - [x] Fixed backspace bug
 - [x] Time trial gamemode
+- [x] Blur on not focused
 - [ ] Alphabet gamemode
 - [ ] Pi gamemode
 - [ ] Multiplayer

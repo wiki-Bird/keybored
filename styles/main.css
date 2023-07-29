@@ -352,10 +352,30 @@ label {
     100% { transform: translate(0.5px, -1px) rotate(-0.5deg); }
 }
 
-
-
-
 .shaking {
     animation: shake 0.25s;
     animation-iteration-count: 1; 
+}
+
+.typeBlur {
+    filter: blur(3px);
+    transition: all 0.3s ease-in-out;
+    opacity: 0.3;
+}
+
+.blurText {
+    opacity: 1!important;
+    filter: blur(0px)!important;
+    position: absolute;
+    z-index: 2;
+    font-size: 1.7rem;
+    text-shadow: 0px 0px 5px #00000038;
+    /* center */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: all 0.3s ease-in-out;
+
+    /* click through this div */
+    pointer-events: none;
 }
