@@ -109,7 +109,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }
             back = false;
         }
-        else if (newestChar == " " || newestChar == "Enter" || event.inputType == "insertLineBreak" || event.inputType == "insertParagraph") {
+        else if ((newestChar == " " || newestChar == "Enter" || event.inputType == "insertLineBreak" || event.inputType == "insertParagraph") && !document.querySelector(".timeStat")) {
             linesCheck();
             wordsWritten++;
             if (nextLetter != false) {

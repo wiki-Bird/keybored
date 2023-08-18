@@ -50,6 +50,6 @@
 - [x] Fixed backspace bug
 - [x] Time trial gamemode
 - [x] Blur on not focused
-- [ ] Alphabet gamemode
+- [x] Alphabet gamemode
 - [ ] Pi gamemode
 - [ ] Multiplayer
