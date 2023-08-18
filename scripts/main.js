@@ -44,7 +44,6 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
     else {
-        // console.log(getLines(document.querySelector(".words").childNodes[0]));
         if (document.fonts) {
             document.fonts.ready.then(function() {
                 pageLines = getLines();
@@ -90,8 +89,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
         // click into text box on page load
         document.querySelector(".hiddenInput").focus();
-
-
     }
 });
 

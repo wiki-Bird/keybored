@@ -329,8 +329,7 @@ function endRound() {
     clearInterval(timerInterval);
     
     // make .endStats visible
-    
-    document.querySelector(".contained").style.opacity = "0.2";
+    document.querySelector(".contained").style.opacity = "0.1";
     document.querySelector(".endStats").style.display = "block";
     // wait 1 second
     setTimeout(function() {
@@ -343,12 +342,41 @@ function endRound() {
     wpm = Math.round(wordsWritten / ((timerCount + parseInt(timerStart)) / 60))|| "0";
     accuracy = Math.round(((wordsWritten - incorrectWords) / wordsWritten) * 100) || 0;
     errors = incorrectWords || 0;
-    if (wpm > pb && wpm < 500 && wpm != "Infinity" && accuracy < 70) {
-        pb = wpm;
-        localStorage.setItem("pb", pb);
-    }
 
-    let stats = {"accuracy":accuracy + "%", "words":wordsWritten, "errors":errors, "time taken":(timerCount + parseInt(timerStart)) + "s", "pb":pb};
+    let stats;
+    if (!document.querySelector(".timeStat")) {
+        if (wpm > pb && wpm < 500 && wpm != "Infinity" && accuracy < 70) {
+            pb = wpm;
+            localStorage.setItem("pb", pb);
+        }
+
+        stats = {"accuracy":accuracy + "%", "words":wordsWritten, "errors":errors, "time taken":(timerCount + parseInt(timerStart)) + "s", "pb":pb};
+    }
+    else {
+
+        let allWords = document.querySelectorAll(".word");
+        let lettersWritten = 0;
+        let letterErrors = 0;
+        for (let word of allWords) {
+            console.log(word);
+            let letters = word.querySelectorAll("letter");
+            for (let letter of letters) {
+                lettersWritten++;
+                if (letter.classList.contains("incorrect")) letterErrors++;
+            }
+        }
+
+        let timePb = localStorage.getItem("timePb") || 9999;
+        let curTime = timerCount + parseInt(timerStart);
+
+        if (curTime < timePb && curTime > 0 && accuracy < 70) {
+            timePb = curTime;
+            localStorage.setItem("timePb", timePb);
+        }
+
+        let accuracyLetters = Math.round(((lettersWritten - letterErrors) / lettersWritten) * 100) || 0;
+        stats = {"accuracy":accuracyLetters + "%", "errors":letterErrors, "pb":timePb + "s"};
+    }
     for (let stat in stats) {
         let statDiv = document.createElement("div");
         statDiv.classList.add("stat");
@@ -363,83 +391,67 @@ function endRound() {
         bottomStats.appendChild(statDiv);
     }
     
-    // if not infinity
-    if (wpm == "Infinity") {
-        wpm = "0";
-    }
-    document.querySelector(".bigNum").innerHTML = wpm;
-    let percent = "0%";
+    if (!document.querySelector(".timeStat")) {
+        // if not infinity
+        if (wpm == "Infinity") wpm = "0";
+        document.querySelector(".bigNum").innerHTML = wpm;
+        
+        let percent = "0%";
+        console.log(wpm)
+        // convert to number
+        let wpm2 = Number(wpm);
 
-    console.log(wpm)
-    // convert to number
-    let wpm2 = Number(wpm);
-    
-
-
-    if (wpm2 <= 24) {
-        percent = "<5%";
-    } else if (wpm2 < 27) {
-        percent = "5%";
-    } else if (wpm2 < 30) {
-        percent = "10%";
-    } else if (wpm2 < 32) {
-        percent = "15%";
-    } else if (wpm2 < 35) {
-        percent = "20%";
-    } else if (wpm2 < 37) {
-        percent = "25%";
-    } else if (wpm2 < 39) {
-        percent = "30%";
-    } else if (wpm2 < 41) {
-        percent = "35%";
-    } else if (wpm2 < 44) {
-        percent = "40%";
-    } else if (wpm2 < 46) {
-        percent = "45%";
-    } else if (wpm2 < 48) {
-        percent = "50%";
-    } else if (wpm2 < 51) {
-        percent = "55%";
-    } else if (wpm2 < 54) {
-        percent = "60%";
-    } else if (wpm2 < 57) {
-        percent = "65%";
-    } else if (wpm2 < 61) {
-        percent = "70%";
-    } else if (wpm2 < 65) {
-        percent = "75%";
-    } else if (wpm2 < 71) {
-        percent = "80%";
-    } else if (wpm2 < 77) {
-        percent = "85%";
-    } else if (wpm2 < 81) {
-        percent = "90%";
-    } else if (wpm2 < 89) {
-        percent = "93%";
-    } else if (wpm2 < 94) {
-        percent = "96%";
-    } else if (wpm2 < 100) {
-        percent = "97%";
-    } else if (wpm2 < 105) {
-        percent = "98%";
-    } else if (wpm2 < 107) {
-        percent = "99%";
-    } else if (wpm2 < 112) {
-        percent = "99.2%";
-    } else if (wpm2 < 115) {
-        percent = "99.4%";
-    } else if (wpm2 < 119) {
-        percent = "99.6%";
-    } else if (wpm2 < 123) {
-        percent = "99.7%";
-    } else if (wpm2 < 127) {
-        percent = "99.8%";
-    } else if (wpm2 >= 127) {
-        percent = "99.9%";
+        const thresholds = [
+            { limit: 24, value: "<5%" },
+            { limit: 27, value: "5%" },
+            { limit: 30, value: "10%" },
+            { limit: 32, value: "15%" },
+            { limit: 35, value: "20%" },
+            { limit: 37, value: "25%" },
+            { limit: 39, value: "30%" },
+            { limit: 41, value: "35%" },
+            { limit: 44, value: "40%" },
+            { limit: 46, value: "45%" },
+            { limit: 48, value: "50%" },
+            { limit: 51, value: "55%" },
+            { limit: 54, value: "60%" },
+            { limit: 57, value: "65%" },
+            { limit: 61, value: "70%" },
+            { limit: 65, value: "75%" },
+            { limit: 71, value: "80%" },
+            { limit: 77, value: "85%" },
+            { limit: 81, value: "90%" },
+            { limit: 89, value: "93%" },
+            { limit: 94, value: "96%" },
+            { limit: 100, value: "97%" },
+            { limit: 105, value: "98%" },
+            { limit: 107, value: "99%" },
+            { limit: 112, value: "99.2%" },
+            { limit: 115, value: "99.4%" },
+            { limit: 119, value: "99.6%" },
+            { limit: 123, value: "99.7%" },
+            { limit: 127, value: "99.8%" },
+            { limit: Infinity, value: "99.9%" }
+        ];
+        
+        for (let threshold of thresholds) {
+            if (wpm2 < threshold.limit) {
+                percent = threshold.value;
+                break;
+            }
+        }
+    } else {
+        document.querySelector(".bigNum").innerHTML = (timerCount + parseInt(timerStart));
+        if (timerCount + parseInt(timerStart) < 3) {
+            percent = "Amazing work! That's really fast.";
+        } else if (timerCount + parseInt(timerStart) < 7) {
+            percent = "Good work! That's pretty fast.";
+        } else {
+            percent = "Nice work. Want to try again?";
+        }
     }
 
     document.querySelector(".percent").innerHTML = percent;
-    
 }
 
 function share() {

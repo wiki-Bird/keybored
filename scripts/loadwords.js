@@ -58,10 +58,6 @@ function getLines() {
         let divRect = div.getBoundingClientRect();
         let divRightPosition = divRect.right;
 
-        // console.log(div)
-        // console.log("divRightPosition: " + divRightPosition)
-        // console.log("rightmostPosition: " + rightmostPosition)
-
         if (i === 0) { // first row
             lines[currentRow] = [div];
             rightmostPosition = divRightPosition;
