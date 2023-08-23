@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Keybored / About</title>
+    <title>Keybored / Time Trial</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -39,7 +39,7 @@
                     <a href="index"><i class="fa-solid fa-bolt"></i> Sprint</a>
                     <a href="timetrial"><i class="fa-solid fa-stopwatch"></i> Time Trial</a>
                     <a href="alphabet"><i class="fa-solid fa-arrow-down-a-z"></i> Alphabet</a>
-                    <a href="pi"><i class="fa-solid fa-calculator"></i> Pi</a>
+                    <a href="pi" class="selected"><i class="fa-solid fa-calculator"></i> Pi</a>
                 </div>
             </div>
             <div class="right">
@@ -49,25 +49,41 @@
 
         <div class="main">
             <div class="contained">
-            <h1>keybored: online typing speed game</h1>
-            <p>keybored is a typing speed game that tests your speed and accuracy. It's a simple game, but it's a great way to practice typing and improve your speed and accuracy. It's also a great way to waste time.</p>
-
-            <h2>gamemodes:</h2>
-            <ul>
-                <li><b>Time trial:</b> Type as many words as you can in 30 seconds.</li>
-                <li><b>Sprint:</b> Type a 35 word paragraph as fast as you can.</li>
-                <li><b>Alphabet:</b> Type the alphabet as fast as you can.</li>
-                <li><b>Pi:</b> Type as many digits of pi as you can remember. (under development)</li>
-            </ul>
-
-            <h2>fyi:</h2>
-            <p>Some PBs won't be counted if you have a sufficenty low accuracy or an inhumanly high WPM.</p>
-
+                <div class="stats">
+                    <div class="time"><i class="fa-solid fa-clock"></i> <span class="timer">0</span>s</div>
+                </div>
+                <div class="typeArea piArea">
+                    
+                    <div class="cursorLine">︳</div>
+                    <input type="text" class="hiddenInput no-copy-paste">
+                    <div class="words unselectable"><div class="piStart">3.</div></div>
+                </div>
+            </div>
+            <div class="endStats">
+                <div class="statsBlock">
+                    <div class="topBanner">
+                        <div class="bigStat">
+                            <div class="bigNum highlight">105</div>
+                            <div class="statLabel">words per minute</div>
+                        </div>
+                        <div class="bigText">That's faster than <span class="percent highlight">99%</span> of people!</div>
+                    </div>
+                    <div class="bottomStats"></div>
+                    <div class="buttons">
+                        <button class="statsBtn retry" onclick="retry()"><i class="fa-solid fa-arrow-rotate-left"></i> retry</button>
+                        <button class="statsBtn share" onclick="share()"><i class="fa-solid fa-share"></i> share</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    </div>
-    <footer><a href="about" class="selected">about</a> \ <a href="https://github.com/wiki-Bird/keybored"  target="_blank" rel="noopener noreferrer">source</a> \ <a href="https://ramiels.me/" target="_blank" rel="noopener noreferrer"> ramiel</a></footer>
+    <footer><a href="about">about</a> \ <a href="https://github.com/wiki-Bird/keybored"  target="_blank" rel="noopener noreferrer">source</a> \ <a href="https://ramiels.me/" target="_blank" rel="noopener noreferrer"> ramiel</a></footer>
 
     <script src="./scripts/settings.js"></script>
+    <script src="./scripts/loadwords.js"></script>
+    <script src="./words/words.js"></script>
+    <script src="./scripts/pi.js"></script>
     <script src="./scripts/main.js"></script>
+    <script src="./scripts/typing.js"></script>
 </body>
+

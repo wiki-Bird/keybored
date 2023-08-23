@@ -32,6 +32,30 @@ function loadwords(num, type) {
         }
         wordArea.appendChild(alphabetDiv);
     }
+    else if (type == "pi") {
+        
+        let pi = getPi(num);
+        let piStart = "3."
+        let piStartDiv = document.createElement("div");
+        piStartDiv.classList.add("word");
+        for (let letter of piStart) {
+            let letterDiv = document.createElement("letter");
+            letterDiv.classList.add("piStart");
+            letterDiv.innerHTML = letter;
+            piStartDiv.appendChild(letterDiv);
+        }
+        wordArea.appendChild(piStartDiv);
+
+        for (let digit of pi) {
+            let digitDiv = document.createElement("div");
+            digitDiv.classList.add("word");
+            let digitLetterDiv = document.createElement("letter");
+            digitLetterDiv.innerHTML = digit;
+            digitLetterDiv.classList.add("piDigit");
+            digitDiv.appendChild(digitLetterDiv);
+            wordArea.appendChild(digitDiv);
+        }
+    }
 }
 
 function getWords(num) {
@@ -44,6 +68,18 @@ function getWords(num) {
         return wordlist;
     }
 }
+
+function getPi(num) {
+    if (text["Pi"]) {
+        let pi = text["Pi"];
+        let pistring = "";
+        // get pi from words.js 
+        pistring = pi.slice(num - 1, 1000 * num);
+
+        return pistring;
+    }
+}
+
 
 function getLines() {
     let words = document.querySelector(".words");

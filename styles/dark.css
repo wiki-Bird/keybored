@@ -21,6 +21,10 @@
     --orange: orange;
 }
 
+.piStart {
+    color: var(--text-light-secondary)!important;
+}
+
 body {
     background-color: var(--bg-dark);
     color: var(--text-light-main);

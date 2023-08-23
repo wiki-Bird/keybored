@@ -12,6 +12,10 @@ const timerStart = timer.innerHTML;
 let countDown = false; 
 var timerCount = parseInt(timerStart);
 
+let piChecker = false;
+let check = false;
+
+
 
 inputBox.addEventListener("focus", function() {
     tabbed = true;
@@ -40,11 +44,30 @@ document.addEventListener("DOMContentLoaded", function() {
     var valueCur = hiddenInput.value;
     var wordsStart = words.innerHTML;
 
+    // if pi 
+    let pi = false;
+    if (document.querySelector(".piArea")) pi = true;
+
     hiddenInput.value = ""; // reset textbox on page reload
     var firstWord = words.childNodes[0]; // get first child div of words
     firstWord.classList.add("active"); // give firstword the "active" class
 
     let screenshakeStorage = sessionStorage.getItem("screenShake");
+
+    if (pi) {
+        // move cursor to the start of the second word
+        let secondWord = words.childNodes[1];
+        let secondWordRect = secondWord.getBoundingClientRect();
+        let XPos = secondWordRect.left;
+        let YPos = secondWordRect.bottom - 2;
+        let cursor = document.querySelector(".cursorLine");
+        let parentPosition = cursor.parentElement.getBoundingClientRect();
+        let verticalOffset = 40;
+        let adjustedXPos = XPos - parentPosition.left;
+        let adjustedYPos = YPos - parentPosition.top - verticalOffset;
+        cursor.style.left = adjustedXPos + "px";
+        cursor.style.top = adjustedYPos + "px";
+    }
 
 
     hiddenInput.addEventListener("keydown", function(event) { 
@@ -117,6 +140,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     let letter = activeWord.childNodes[i];
                     if (!letter.classList.contains("correct") && !letter.classList.contains("incorrect")) {
                         letter.classList.add("incorrect");
+                        endRound();
                     }
                 }
             }
@@ -147,16 +171,49 @@ document.addEventListener("DOMContentLoaded", function() {
             }
             activeWord.classList.remove("active");
         }
-        else {
+        else { // if the newest character is not a space
+
+            // if pi, check if it's the first letter of the first word
+            // if it is, and the user typed 1, input a "3. 1" for them
+            if (pi) {
+                if (activeWord.previousSibling == null) {
+                    
+                    if (newestChar == "1") {
+                        check = true;
+                        let event = new KeyboardEvent('keydown', {key: '3'}); // Fix: Use document.createElement
+                        hiddenInput.dispatchEvent(event);
+                        let event2 = new KeyboardEvent('keydown', {key: '.'}); // Fix: Use document.createElement
+                        hiddenInput.dispatchEvent(event2);
+                        let event3 = new KeyboardEvent('keydown', {key: ' '}); // Fix: Use document.createElement
+                        hiddenInput.dispatchEvent(event3);
+                        piChecker = true;
+                        let event4 = new KeyboardEvent('keydown', {key: '1'}); // Fix: Use document.createElement
+                        hiddenInput.dispatchEvent(event4);
+                        
+                        return;
+                    }
+                    else if (nextLetter.previousSibling == null && check == false) {
+                        endRound();
+                    }
+                }
+            }
+
+
             // if nextLetter exists check if it's the same as newestChar
-            
             if (nextLetter != false) {
                 moveCursorRight(nextLetter, false);
                 if (nextLetter && nextLetter.innerHTML == newestChar) {
                     nextLetter.classList.add("correct");
+                    if (piChecker) {
+                        let event = new KeyboardEvent('keydown', {key: ' '});
+                        hiddenInput.dispatchEvent(event);
+                    }
                 }
                 else if (nextLetter) {
                     nextLetter.classList.add("incorrect");
+                    if (pi) {
+                        endRound();
+                    }
                 }
                 else {
                     // log error and info

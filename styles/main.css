@@ -85,6 +85,11 @@ h1 {
     padding: 1rem 2rem 1rem 2rem;
 }
 
+.correct, .incorrect {
+    opacity: 1!important;
+    transition: opacity 0.1s ease-out;
+}
+
 .y, .correct {
     color: var(--green);
 }
@@ -383,6 +388,24 @@ label {
     pointer-events: none;
 }
 
-.alphabet {
+.alphabet, .piWords {
     height: auto!important;
+}
+
+.piDigit {
+    max-width: 60%;
+    /* overflow text mid word */
+    overflow-wrap: break-word;
+}
+
+.piDigit {
+    opacity: 0;
+}
+
+.piArea {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: 100%;
+    width: 100%;
 }

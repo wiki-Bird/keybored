@@ -17,7 +17,6 @@
   - Type a 35 word paragraph as fast as you can.
 - Alphabet:
     - Type the alphabet as fast as you can.
-    - Under development.
 - Pi:
     - Type as many digits of pi as you can, without making a mistake.
     - Under development.
@@ -51,5 +50,6 @@
 - [x] Time trial gamemode
 - [x] Blur on not focused
 - [x] Alphabet gamemode
-- [ ] Pi gamemode
+- [x] Pi gamemode
+- [ ] Small screen support
 - [ ] Multiplayer
