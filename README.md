@@ -51,5 +51,5 @@
 - [x] Blur on not focused
 - [x] Alphabet gamemode
 - [x] Pi gamemode
-- [ ] Small screen support
+- [x] Small screen support
 - [ ] Multiplayer

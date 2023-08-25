@@ -140,7 +140,8 @@ document.addEventListener("DOMContentLoaded", function() {
                     let letter = activeWord.childNodes[i];
                     if (!letter.classList.contains("correct") && !letter.classList.contains("incorrect")) {
                         letter.classList.add("incorrect");
-                        endRound();
+                        // if pi,
+                        if (pi) endRound();
                     }
                 }
             }

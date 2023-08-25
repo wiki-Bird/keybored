@@ -1,6 +1,7 @@
 :root {
     --bg-light: #f8f9fa;
     --bg-dark: #343a40;
+    --bg-dark-secondary: #434b53;
 
     --text-light-main: #ffffff;
     --text-light-secondary: #d4d8db;
@@ -17,6 +18,106 @@
     --font-xlarge: 1.5rem;
     --font-xxlarge: 1.7rem;
     --font-small: 0.8rem;
+    --font-xsmall: 0.7rem;
+}
+
+@media screen and (min-width: 1001px) {
+    body {
+        font-size: 1.1rem;
+    }
+    .typeArea {
+        font-size: var(--font-xxlarge);
+    }
+    footer {
+        font-size: var(--font-small);
+    }
+    .blurText {
+        font-size: var(--font-xxlarge);
+    }
+    .nav a {
+        margin-left: 30px;
+    }
+    .statLabel {
+        font-size: var(--font-large);
+    }
+    .bigNum {
+        font-size: 8rem;
+    }
+    .bigText {
+        font-size: 2.5rem;
+    }
+    .statNum {
+        font-size: 3rem;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    body {
+        font-size: 0.9rem;
+    }
+    .typeArea {
+        font-size: var(--font-xlarge);
+    }
+    footer {
+        font-size: var(--font-xsmall);
+    }
+    .blurText {
+        font-size: var(--font-xlarge);
+    }
+    .nav a, .right a {
+        padding: 10px;
+        background-color: var(--bg-dark);
+        border-radius: 4px;
+        font-size: var(--font-normal);
+    }
+    .navText {
+        display: none;
+    }
+    h1 {
+        font-size: var(--font-xlarge);
+    }
+    .nav a {
+        margin-left: 10px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    body {
+        font-size: 0.8rem;
+    }
+    .typeArea {
+        font-size: var(--font-large);
+    }
+    footer {
+        font-size: var(--font-xsmall);
+    }
+    .blurText {
+        font-size: var(--font-large);
+    }
+    .nav a, .right a {
+        padding: 10px;
+        background-color: var(--bg-dark-secondary);
+        border-radius: 4px;
+        font-size: var(--font-small);
+    }
+    .navText {
+        display: none;
+    }
+    h1 {
+        font-size: var(--font-large);
+    }
+    .statLabel {
+        font-size: var(--font-normal);
+    }
+    .bigNum {
+        font-size: 4rem;
+    }
+    .bigText {
+        font-size: var(--font-xxlarge);
+    }
+    .statNum {
+        font-size: 2rem;
+    }
 }
 
 html, body {
@@ -34,19 +135,14 @@ footer {
     height: 40px; 
     text-align: center;
     justify-content: space-between;
-    font-size: var(--font-small);
     transition: opacity 1s;
     word-spacing: 20px;
 }
 
 body {
-    /* font-family: 'Frank Ruhl Libre', serif;
-    font-family: 'Inter', sans-serif; */
     font-family: 'Roboto Slab', serif;
 
-    font-size: 1.1rem;
     line-height: 1.5;
-
     margin: 0;
     padding: 0;
 }
@@ -77,9 +173,6 @@ h1 {
     transition: all 0.1s ease-in-out;
 }
 
-.nav a {
-    margin-left: 30px;
-}
 
 .main {
     padding: 1rem 2rem 1rem 2rem;
@@ -158,9 +251,7 @@ label {
     margin-left: 2.5px;
 }
 
-.typeArea {
-    font-size: var(--font-xxlarge);
-}
+
 
 .stats {
     height: 30px;
@@ -230,17 +321,7 @@ label {
 
 .word {
     padding-right:10px; 
-    /* .6rem */
 }
-
-
-/* .words, .words2 {
-    line-height: 1.5em;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-} */
 
 .cursor {
     opacity: 1;
@@ -253,12 +334,7 @@ label {
     z-index: 3;
 }
 
-/* .contained {
-    display:none;
-} */
-
 .statsBlock {
-    /* background-color: #404034; */
     /* vertical and horizontal centre */
     position: absolute;
     top: 50%;
@@ -269,10 +345,8 @@ label {
 }
 
 .topBanner, .bottomStats {
-    /* inside divs side by side */
     display: flex;
     justify-content: space-between;  
-     /*align text centre verticalt  */
 }
 .topBanner {
     align-items: center;
@@ -285,13 +359,11 @@ label {
 }
 
 .bigNum {
-    font-size: 8rem;
     margin: 0;
     padding: 0;
 }
 
 .statLabel {
-    font-size: 1.2rem;
     padding: 0;
     margin: 0;
     /* center hosirizonally */
@@ -299,7 +371,6 @@ label {
 }
 
 .bigText {
-    font-size: 2.5rem;
     margin: 0;
     padding: 0;
     line-height: 1.2;
@@ -310,7 +381,6 @@ label {
 }
 
 .statNum {
-    font-size: 3rem;
     margin: 0;
     padding: 0;
     line-height: 1.2;
@@ -382,7 +452,6 @@ label {
     transform: translate(-5%, -50%);
 
     z-index: 2;
-    font-size: 1.7rem;
     text-shadow: 0px 0px 5px #00000038;
     transition: all 0.3s ease-in-out;
     pointer-events: none;
