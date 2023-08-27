@@ -1,12 +1,7 @@
 <p align="center"><a href="https://keybored.ramiels.me/" target="_blank" rel="noreferrer noopener"><img width="150" alt="Keybored Logo" src="https://media.discordapp.net/attachments/590667063165583409/1129618207641190410/key.png?width=702&height=702"></a></p>
 
-
-<h3 align="center"> keybored: online typing speed game</h3>
+<h3 align="center"> keybored: online speed typing games</h3>
 <p align="center">Test your words per minute in a series of games at <a href="https://keybored.ramiels.me/">keybored.ramiels.me</a>.</p>
-
-
-
-
 
 <br/><br/>
 ## Gamemodes

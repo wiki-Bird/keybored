@@ -71,6 +71,8 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
     hiddenInput.addEventListener("keydown", function(event) { 
+        if (event.key === "Shift" || event.key == "Control") return;
+
         linesCheck();
         if (start == false) { // start timer
             start = true;

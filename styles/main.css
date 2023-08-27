@@ -120,6 +120,45 @@
     }
 }
 
+@media screen and (max-width: 400px) {
+    body {
+        font-size: 0.8rem;
+    }
+    .typeArea {
+        font-size: var(--font-normal);
+    }
+    footer {
+        font-size: var(--font-xsmall);
+    }
+    .blurText {
+        font-size: var(--font-xsmall);
+    }
+    .nav a, .right a {
+        padding: 7px;
+        background-color: var(--bg-dark-secondary);
+        border-radius: 4px;
+        font-size: var(--font-xsmall);
+    }
+    .navText {
+        display: none;
+    }
+    h1 {
+        font-size: var(--font-large);
+    }
+    .statLabel {
+        font-size: var(--font-normal);
+    }
+    .bigNum {
+        font-size: 4rem;
+    }
+    .bigText {
+        font-size: var(--font-xxlarge);
+    }
+    .statNum {
+        font-size: 2rem;
+    }
+}
+
 html, body {
     height: 100%;
 }
