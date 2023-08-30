@@ -79,6 +79,18 @@
     .nav a {
         margin-left: 10px;
     }
+    .statLabel {
+        font-size: var(--font-large);
+    }
+    .bigNum {
+        font-size: 4rem;
+    }
+    .bigText {
+        font-size: var(--font-xxlarge);
+    }
+    .statNum {
+        font-size: 2rem;
+    }
 }
 
 @media screen and (max-width: 600px) {
@@ -110,10 +122,10 @@
         font-size: var(--font-normal);
     }
     .bigNum {
-        font-size: 4rem;
+        font-size: 2rem;
     }
     .bigText {
-        font-size: var(--font-xxlarge);
+        font-size: var(--font-xlarge);
     }
     .statNum {
         font-size: 2rem;

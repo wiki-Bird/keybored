@@ -404,38 +404,45 @@ function endRound() {
     errors = incorrectWords || 0;
 
     let stats;
-    if (!document.querySelector(".timeStat")) {
+    if (document.querySelector(".timeStat")) {
+            let allWords = document.querySelectorAll(".word");
+            let lettersWritten = 0;
+            let letterErrors = 0;
+            for (let word of allWords) {
+                console.log(word);
+                let letters = word.querySelectorAll("letter");
+                for (let letter of letters) {
+                    lettersWritten++;
+                    if (letter.classList.contains("incorrect")) letterErrors++;
+                }
+            }
+    
+            let timePb = localStorage.getItem("timePb") || 9999;
+            let curTime = timerCount + parseInt(timerStart);
+    
+            if (curTime < timePb && curTime > 0 && accuracy < 70) {
+                timePb = curTime;
+                localStorage.setItem("timePb", timePb);
+            }
+    
+            let accuracyLetters = Math.round(((lettersWritten - letterErrors) / lettersWritten) * 100) || 0;
+            stats = {"accuracy":accuracyLetters + "%", "errors":letterErrors, "pb":timePb + "s"};
+    }
+    else if (document.querySelector(".piStat")) {
+        const nextWord = document.querySelector(".active");
+        let piPb = localStorage.getItem("piPb") || 0;
+        if (wordsWritten > piPb) {
+            piPb = wordsWritten;
+            localStorage.setItem("piPb", piPb);
+        }
+        stats = {"next digit": nextWord.innerHTML, "time taken":(timerCount + parseInt(timerStart)) + "s", "pb":piPb};
+    }
+    else {
         if (wpm > pb && wpm < 500 && wpm != "Infinity" && accuracy < 70) {
             pb = wpm;
             localStorage.setItem("pb", pb);
         }
-
         stats = {"accuracy":accuracy + "%", "words":wordsWritten, "errors":errors, "time taken":(timerCount + parseInt(timerStart)) + "s", "pb":pb};
-    }
-    else {
-
-        let allWords = document.querySelectorAll(".word");
-        let lettersWritten = 0;
-        let letterErrors = 0;
-        for (let word of allWords) {
-            console.log(word);
-            let letters = word.querySelectorAll("letter");
-            for (let letter of letters) {
-                lettersWritten++;
-                if (letter.classList.contains("incorrect")) letterErrors++;
-            }
-        }
-
-        let timePb = localStorage.getItem("timePb") || 9999;
-        let curTime = timerCount + parseInt(timerStart);
-
-        if (curTime < timePb && curTime > 0 && accuracy < 70) {
-            timePb = curTime;
-            localStorage.setItem("timePb", timePb);
-        }
-
-        let accuracyLetters = Math.round(((lettersWritten - letterErrors) / lettersWritten) * 100) || 0;
-        stats = {"accuracy":accuracyLetters + "%", "errors":letterErrors, "pb":timePb + "s"};
     }
     for (let stat in stats) {
         let statDiv = document.createElement("div");
@@ -451,7 +458,27 @@ function endRound() {
         bottomStats.appendChild(statDiv);
     }
     
-    if (!document.querySelector(".timeStat")) {
+    if (document.querySelector(".timeStat")) {
+        document.querySelector(".bigNum").innerHTML = (timerCount + parseInt(timerStart));
+        if (timerCount + parseInt(timerStart) < 3) {
+            percent = "Amazing work! That's really fast.";
+        } else if (timerCount + parseInt(timerStart) < 7) {
+            percent = "Good work! That's pretty fast.";
+        } else {
+            percent = "Nice work. Want to try again?";
+        }
+    }
+    else if (document.querySelector(".piStat")){
+        document.querySelector(".bigNum").innerHTML = wordsWritten;
+        if (wordsWritten > 50) {
+            percent = "Amazing work! That's a lot.";
+        } else if (wordsWritten > 20) {
+            percent = "Good work! That's pretty good.";
+        } else {
+            percent = "Nice work. Want to try again?";
+        }
+    }
+    else {
         // if not infinity
         if (wpm == "Infinity") wpm = "0";
         document.querySelector(".bigNum").innerHTML = wpm;
@@ -499,15 +526,6 @@ function endRound() {
                 percent = threshold.value;
                 break;
             }
-        }
-    } else {
-        document.querySelector(".bigNum").innerHTML = (timerCount + parseInt(timerStart));
-        if (timerCount + parseInt(timerStart) < 3) {
-            percent = "Amazing work! That's really fast.";
-        } else if (timerCount + parseInt(timerStart) < 7) {
-            percent = "Good work! That's pretty fast.";
-        } else {
-            percent = "Nice work. Want to try again?";
         }
     }
 
