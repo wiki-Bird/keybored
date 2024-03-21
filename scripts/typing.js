@@ -3,6 +3,7 @@ var tabbed = false;
 var start = false;
 
 let wordsWritten = 0;
+let lettersWritten = 0;
 let incorrectWords = 0;
 let lineWords = 0;
 let typingCheck = false;
@@ -94,6 +95,7 @@ document.addEventListener("DOMContentLoaded", function() {
             if (nextLetter != false) {
                 // remove the "correct"/"incorrect" class from the letter before nextLetter
                 let letterBefore = nextLetter.previousSibling;
+                lettersWritten -= 1;
                 // if there is a letter before nextLetter
                 if (letterBefore) {
                     console.log("letterBefore exists");
@@ -207,6 +209,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 moveCursorRight(nextLetter, false);
                 if (nextLetter && nextLetter.innerHTML == newestChar) {
                     nextLetter.classList.add("correct");
+                    lettersWritten += 1;
                     if (piChecker) {
                         let event = new KeyboardEvent('keydown', {key: ' '});
                         hiddenInput.dispatchEvent(event);
@@ -399,20 +402,21 @@ function endRound() {
     let bottomStats = document.querySelector(".bottomStats");
     bottomStats.innerHTML = "";
     // add a div to the bottomStats for each stat
-    wpm = Math.round(wordsWritten / ((timerCount + parseInt(timerStart)) / 60))|| "0";
+    // wpm = Math.round(wordsWritten / ((timerCount + parseInt(timerStart)) / 60))|| "0";
+    wpm = Math.round((lettersWritten / 5) / ((timerCount + parseInt(timerStart)) / 60)) || "0";
     accuracy = Math.round(((wordsWritten - incorrectWords) / wordsWritten) * 100) || 0;
     errors = incorrectWords || 0;
 
     let stats;
     if (document.querySelector(".timeStat")) {
             let allWords = document.querySelectorAll(".word");
-            let lettersWritten = 0;
+            let lettersWritten2 = 0;
             let letterErrors = 0;
             for (let word of allWords) {
                 console.log(word);
                 let letters = word.querySelectorAll("letter");
                 for (let letter of letters) {
-                    lettersWritten++;
+                    lettersWritten2++;
                     if (letter.classList.contains("incorrect")) letterErrors++;
                 }
             }
@@ -425,7 +429,7 @@ function endRound() {
                 localStorage.setItem("timePb", timePb);
             }
     
-            let accuracyLetters = Math.round(((lettersWritten - letterErrors) / lettersWritten) * 100) || 0;
+            let accuracyLetters = Math.round(((lettersWritten2 - letterErrors) / lettersWritten2) * 100) || 0;
             stats = {"accuracy":accuracyLetters + "%", "errors":letterErrors, "pb":timePb + "s"};
     }
     else if (document.querySelector(".piStat")) {
